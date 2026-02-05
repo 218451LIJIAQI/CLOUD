@@ -1,0 +1,452 @@
+﻿Chapter 4:
+Virtual Infrastructure and 
+
+Cloud
+Semester 1 2025/2026
+
+By 
+
+Assoc. Prof. Ts. Dr. Novia Admodisastro
+
+Software Engineering & Information System Department
+
+FSKTM, UPM
+
+
+
+Topic Outline
+
+• Cloud Virtualization
+
+• Virtualisation Characteristics
+
+• Virtual Machine
+
+• Hypervisors
+
+
+
+Introduction
+
+• Virtualization refers to the act of creating a virtual (rather than 
+actual) version of something. 
+
+• It includes virtual computer hardware platforms, operating 
+systems, storage devices, and computer network resources. 
+
+• It is able to run multiple operating systems on a single physical 
+system and share the underlying hardware resources. 
+• Virtual software mimics the functions of physical hardware to run 
+
+multiple virtual machines simultaneously on a single physical machine. 
+
+• Virtualization began in the 1960s, as a method of logically 
+dividing the system resources provided by mainframe 
+computers between different applications. 
+
+• Businesses use virtualization to use their hardware resources 
+efficiently and get greater returns from their investment. 
+• It also powers cloud computing services that help organizations 
+
+manage infrastructure more efficiently.
+
+3
+
+
+
+Why is virtualization important?
+
+• By using virtualization, you can interact with any hardware 
+resource with greater flexibility. 
+• physical servers consume electricity, take up storage space, and need 
+
+maintenance
+• often limited by physical proximity and network design if we want to 
+
+access them. 
+• virtualization removes all these limitations by abstracting physical 
+
+hardware functionality into software - can manage, maintain, and use 
+your hardware infrastructure like an application on the web.
+
+4
+
+
+
+Virtualization Examples
+
+Consider a company that needs Each of these functions has different 
+servers for three functions: configuration requirements:
+
+1. Store business email securely 1. The email application requires 
+more storage capacity and a 
+Windows operating system.
+
+2. Run a customer-facing 
+application 2. The customer-facing 
+
+application requires a Linux 
+operating system and high 
+
+3. Run internal business processing power to handle 
+applications large volumes of website 
+
+traffic.
+
+3. The internal business 
+application requires iOS and 
+
+To meet these requirements, the company sets up threemdoiffreere innttdeerdnicaalt emd epmhysoicrayl s(eRrAveMrs )f.or each
+application. The company must make a high initial investment and perform ongoing maintenance and
+upgrades for one machine at a time.
+The company also cannot optimize its computing capacity. It pays 100% of the servers’ maintenance
+
+5
+costs but uses only a fraction of their storage and processing capacities.
+
+
+
+Why is virtualization important? (cont.)
+
+• Efficient hardware use
+• With virtualization, the company 
+
+creates three digital servers, or virtual 
+machines, on a single physical server. 
+
+• It specifies the operating system 
+requirements for the virtual machines 
+and can use them like the physical 
+servers. 
+
+• However, the company now has less 
+hardware and fewer related 
+expenses.
+
+• Infrastructure as a service
+• The company can go one step further 
+
+and use a cloud instance or virtual 
+machine from a cloud computing 
+provider e.g. AWS. 
+
+One Hardware Machine Running Several Virtual Serv6ers
+
+
+
+Virtualisation and Cloud
+
+• In a virtualized environment, computing environments can be 
+dynamically created, expanded, shrunk or moved as demand 
+varies. 
+
+• Virtualization is extremely well suited to a dynamic cloud 
+infrastructure, because it provides important advantages in 
+sharing, manageability and isolation
+• that is, multiple users and applications can share physical resources 
+
+without affecting one another. 
+
+• One of the initial steps toward Cloud computing is 
+incorporating virtualization, which is separating the hardware 
+from the software. 
+
+7
+
+
+
+Why Cloud Relies on Virtualisation?
+
+• Gives users more control when using the cloud. 
+
+• Allows users to create their own ‘virtual computer’, with 
+specified applications, software and operating machines. 
+• For example, AWS manages all the underlying hardware, and the 
+
+company can request server resources with varying configurations. All 
+the applications run on these virtual servers without the users noticing 
+any difference. Server management also becomes easier for the 
+company’s IT team.
+
+• Users don't need to worry about what software is being run 
+where. 
+• This is especially important with clouds, as they won’t often know on 
+
+which machines their data or work will be running. 
+
+8
+
+
+
+ref: http://mainframe2cloud.com/Virtualization-Journey-Mainframe-Cloud/
+
+9
+
+
+
+How is virtualization different from cloud 
+computing?
+
+• Cloud computing is the on-demand delivery of computing 
+resources over the internet with pay-as-you-go pricing. 
+• Instead of buying, owning, and maintaining a physical data center, you 
+
+can access technology services, such as computing power, storage, and 
+databases, as you need them from a cloud provider.
+
+• Virtualization technology makes cloud computing possible. 
+• Cloud providers set up and maintain their own data centers. 
+• They create different virtual environments that use the underlying 
+
+hardware resources. 
+• System could be programmed to access these cloud resources by 
+
+using APIs. The infrastructure needs can be met as a fully managed 
+service.
+
+10
+
+
+
+How is server virtualization different from 
+containerization?
+
+• Containerization is a way to deploy application code to run on 
+any physical or virtual environment without changes. 
+• Developers bundle application code with related libraries, 
+
+configuration files, and other dependencies that the code needs to run. 
+• This single package of the software, called a container, can run 
+
+independently on any platform. 
+• Containerization is a type of application virtualization.
+
+• You can think of server virtualization as building a road to 
+connect two places. 
+• You have to recreate an entire virtual environment and then run your 
+
+application on it. 
+• By comparison, containerization is like building a helicopter that can fly 
+
+to either of those places. 
+• Your application is inside a container and can run on all types of 
+
+physical or virtual environments.
+
+11
+
+
+
+Virtualisation Characteristics
+
+• Virtualization has 3 characteristics that make it ideal for cloud 
+computing: 
+• Partitioning
+
+• We can use partitioning to support many applications and 
+operating systems (OSes) in a single physical system. 
+
+• Isolation
+• Because each virtual machine is isolated, each machine is protected 
+
+from crashes and viruses in the other machines. 
+• What makes virtualization so important for the cloud is that it 
+
+decouples the software from the hardware. 
+
+• Encapsulation:
+• Encapsulation can protect each application so that it doesn’t 
+
+interfere with other applications. 
+
+• Using encapsulation, a virtual machine can be represented (and 
+even stored) as a single file, making it easy to identify and present 
+to other applications. 
+
+12
+
+
+
+How does virtualization work?
+Virtual machines and hypervisors are two important concepts in virtualization.
+
+• Virtual machine • Hypervisor
+• A virtual machine is a software- • The hypervisor is a software 
+
+defined computer that runs on component that manages 
+a physical computer with a multiple virtual machines in a 
+separate operating system and computer. 
+computing resources. • It ensures that each virtual 
+
+• The physical computer is called machine gets the allocated 
+the host machine and virtual resources and does not 
+machines are guest machines. interfere with the operation of 
+Multiple virtual machines can other virtual machines. 
+run on a single physical • There are two types of 
+machine. hypervisors.
+
+• Virtual machines are abstracted 
+from the computer hardware 
+by a hypervisor.
+
+13
+
+
+
+4.2 VM
+
+Physical Machine (Host) and Virtual 
+M4a.c2hin.1e ( GVuierst Muachl inMe)achine (cont.)
+
+• Servers end up as files that stored on a physical box, or in 
+• Serveenrtserepnridseu sptoarasgfei.l es that stored on a physical box, or in enterprise
+
+(1) A virtual server can be serviced by one or more hosts, and 
+storage.
+
+(2) One host may house more than one virtual server. 
+
+• A virtual server can be serviced by one or more hosts, and one host
+• Virtual servers can still be referred to by their function i.e. email 
+
+server, database server, etc. 
+may house more than one virtual server.
+
+H
+
+H AND/OR H
+
+H
+
+• Virtual servers can still be referred to by their functio14n i.e. email
+
+server, database server, etc.
+
+12
+
+By : Assoc. Prof. Dr. Masnida Hj Hussin
+
+
+
+4.1 Virtualization
+
+4.1.1 Introduction of Virtualization 
+Virtualisation scena(croinot.s)
+
+5
+
+By : Assoc. Prof. Dr. Masnida Hj Hussin
+
+15
+
+
+
+Hypervisor
+
+• To manage the various aspects of virtualization in cloud 
+computing most companies use hypervisors. 
+
+• The hypervisor becomes an ideal delivery mechanism by 
+allowing service providers to show the same application on lots 
+of different systems. 
+• Hypervisors can load multiple operating systems, so they are a very 
+
+practical way of getting things virtualized quickly and efficiently. 
+• A hypervisor is an operating system, which means that it knows how to 
+
+act as a traffic cop to make things happen in an orderly manner. 
+• The hypervisor sits at the lowest levels of the hardware environment. 
+• Because in cloud computing you need to support many different 
+
+operating environments, the hypervisor becomes an ideal delivery 
+mechanism. 
+
+17
+
+
+
+Hypervisor (cont.)
+• Type 1 hypervisor (Native/Bare-metal)
+
+• Is a hypervisor program installed directly on the computer’s hardware instead of the 
+operating system with fine-grained timesharing of resources.
+
+• Therefore, type 1 hypervisors have better performance and are commonly used by 
+enterprise applications. 
+
+• KVM uses the type 1 hypervisor to host multiple virtual machines on the Linux operating 
+system.
+
+(Guest OS)
+
+(Guest OS)
+
+• Type 2 hypervisor (Hosted)
+• The type 2 hypervisor is installed on an operating system and suitable for end-user 
+
+computing.
+• Provide hosting for websites on virtual servers which pull computing resource from 
+
+extensive underlying networks of physical web servers. 
+• Ex. Examples of type 2 Hypervisors include Microsoft Virtual PC, Oracle Virtual Box, VMware 
+
+Workstation, Oracle Solaris Zones, VMware Fusion etc. 
+• It relies on the host machine’s OS to undertake certain operations like managing calls to 
+
+the CPU, managing network resources, managing memory and storage. This allows for Type 
+2 hypervisors to support a wide range of hardware. 
+
+(Guest OS)
+
+(Guest OS) 18
+
+
+
+Cloud Provider a Visualisation 
+Infrastructure
+
+• Amazon's cloud uses Xen for its virtualization infrastructure.
+
+• Xen Project hypervisor is using microkernel design. 
+
+• Was launched in October 2003 by University of Cambridge 
+Computer Laboratory. 
+
+• Leading open source virtualisation platform which is powering 
+the biggest players in cloud today. 
+
+• Other cloud providers - RackSpace, OpenStack, Verizon Cloud
+
+19
+
+
+
+Takeaway
+
+• Closely associated with one another, virtualization and cloud 
+computing are often mentioned in the same breath. 
+
+• In a nutshell, virtualization is a technology that uses software to 
+create virtual versions of a machine’s software and hardware 
+components. 
+
+• Clouds are IT environments that utilize virtualization and then 
+make those software and hardware components accessible on-
+demand. 
+
+
+
+Refers Activity 5: 
+Flashcards
+
+(part 1 & part 2)
+
+21
+
+
+
+External References
+
+• https://www.xenproject.org
+
+22

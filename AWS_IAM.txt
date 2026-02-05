@@ -1,0 +1,873 @@
+﻿Module 4: AWS Cloud Security
+AWS Academy Cloud Foundations
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved.
+
+
+
+Module overview
+
+Topics Activities
+• AWS shared responsibility model • AWS shared responsibility model activity
+
+• AWS Identity and Access Management (IAM)
+
+• Securing accounts Demo
+• Securing data on AWS • Recorded demonstration of IAM
+
+Lab
+• Introduction to AWS IAM
+
+Knowledge check
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 2
+
+
+
+Module objectives
+
+After completing this module, you should be able to: 
+• Recognize the shared responsibility model
+
+• Identify the responsibility of the customer and AWS
+
+• Recognize IAM users, groups, and roles
+
+• Describe different types of security credentials in IAM
+
+• Explore IAM users and groups
+
+• Recognize how to secure AWS data
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 3
+
+
+
+Section 1: AWS shared responsibility 
+model
+Module 4: AWS Cloud Security
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved.
+
+
+
+AWS shared responsibility model
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 5
+
+
+
+AWS responsibility: Security of the cloud
+
+AWS responsibilities:
+• Physical security of data centers
+
+AWS services • Controlled, need-based access
+
+• Hardware and software infrastructure
+Compute Storage Database Networking
+
+• Storage decommissioning, host operating system (OS) 
+access logging, and auditing
+
+AWS Global Regions
+Infrastructure
+
+Availability Zones • Network infrastructure
+Edge locations
+
+• Intrusion detection
+
+• Virtualization infrastructure
+• Instance isolation
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 6
+
+
+
+Customer responsibility: Security in the cloud
+
+Customer responsibilities:
+• Amazon Elastic Compute Cloud (Amazon EC2) 
+
+instance operating system
+Customer data
+
+• Including patching, maintenance
+
+Applications, IAM • Applications
+• Passwords, role-based access, etc.
+
+Operating system, network, and firewall configuration • Security group configuration
+
+• OS or host-based firewalls
+Network traffic 
+
+Client-side data Server-side 
+protection • Including intrusion detection or prevention systems
+
+encryption and encryption 
+(encryption, 
+
+data integrity (file system or • Network configurations
+integrity, 
+
+authentication data)
+identity) • Account management
+
+Customer-configurable • Login and permission settings for each user
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 7
+
+
+
+Service characteristics and security responsibility (1 of 2)
+
+Example services managed by the customer Infrastructure as a service (IaaS) 
+• Customer has more flexibility over configuring networking 
+
+and storage settings
+
+• Customer is responsible for managing more aspects of 
+the security 
+
+Amazon Amazon Elastic Amazon 
+EC2 Block Store Virtual Private Cloud • Customer configures the access controls 
+
+(Amazon EBS) (Amazon VPC)
+
+Platform as a service (PaaS) 
+Example services managed by AWS • Customer does not need to manage the underlying 
+
+infrastructure
+
+• AWS handles the operating system, database patching, 
+firewall configuration, and disaster recovery
+
+• Customer can focus on managing code or data
+AWS Amazon AWS Elastic 
+
+Lambda Relational Database Beanstalk
+Service (Amazon RDS)
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 8
+
+
+
+Service characteristics and security responsibility (2 of 2)
+
+SaaS examples Software as a service (SaaS) 
+• Software is centrally hosted
+
+• Licensed on a subscription model or pay-as-you-go 
+basis.
+
+AWS Trusted AWS Shield Amazon Chime
+Advisor • Services are typically accessed via web browser, 
+
+mobile app, or application programming interface 
+(API)
+
+• Customers do not need to manage the infrastructure 
+that supports the service
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 9
+
+
+
+Activity: AWS 
+shared 
+
+responsibility model
+
+Photo by Pixabay from Pexels.
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 10
+
+
+
+Activity: Scenario 1 of 2
+
+Consider this deployment. Who is responsible – AWS or the customer?
+
+AWS Cloud 1. Upgrades and patches to the 6. Oracle upgrades or patches If 
+Virtual Private Cloud operating system on the EC2 the Oracle instance runs as an 
+(VPC) instance? Amazon RDS instance?
+
+2. Physical security of the data 7. Oracle upgrades or patches If 
+center? Oracle runs on an EC2
+
+instance?
+3. Virtualization infrastructure?
+
+Amazon Simple Amazon Oracle 8. S3 bucket access 
+4. EC2 security group settings?
+
+Storage Service EC2 instance configuration?
+(Amazon S3) 5. Configuration of applications 
+
+that run on the EC2 instance?
+
+AWS Global Infrastructure
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 11
+
+
+
+Activity: Scenario 2 of 2
+
+Consider this deployment. Who is responsible – AWS or the customer?
+Secure Shell 
+(SSH) keys 1. Ensuring that the AWS 6. Ensuring network isolation 
+
+Management Console is not between AWS customers' 
+AWS Command hacked? data?
+
+AWS Line Interface 2. Configuring the subnet? 7. Ensuring low-latency network 
+Management (AWS CLI) connection between the web 
+
+Console Internet 3. Configuring the VPC? server and the S3 bucket?
+
+VPC gateway 4. Protecting against network 8. Enforcing multi-factor 
+outages in AWS Regions? authentication for all user 
+
+Subnet 5. Securing the SSH keys logins?
+
+Web server on 
+Amazon EC2
+
+S3 bucket with 
+objects
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 12
+
+
+
+Section 1 key • AWS and the customer share security responsibilities:
+
+• AWS is responsible for security of the cloud
+takeaways • Customer is responsible for security in the cloud
+
+• AWS is responsible for protecting the infrastructure—including 
+hardware, software, networking, and facilities—that run AWS 
+Cloud services
+
+• For services that are categorized as infrastructure as a service 
+(IaaS), the customer is responsible for performing necessary 
+security configuration and management tasks 
+
+• For example, guest OS updates and security patches, firewall, security group 
+configurations
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 13
+
+
+
+Section 2: AWS Identity and Access 
+Management (IAM)
+Module 4: AWS Cloud Security
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved.
+
+
+
+AWS Identity and Access Management (IAM)
+
+• Use IAM to manage access to AWS resources –
+• A resource is an entity in an AWS account that you can work with
+
+• Example resources; An Amazon EC2 instance or an Amazon S3 bucket
+
+• Example – Control who can terminate Amazon EC2 instances 
+
+• Define fine-grained access rights – AWS Identity and Access 
+Management
+
+• Who can access the resource (IAM)
+
+• Which resources can be accessed and what can the user do to the resource
+
+• How resources can be accessed 
+
+• IAM is a no-cost AWS account feature
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 15
+
+
+
+IAM: Essential components
+
+A person or application that can authenticate with an AWS 
+account.
+
+IAM user
+
+A collection of IAM users that are granted identical 
+authorization.
+
+IAM group
+
+The document that defines which resources can be 
+accessed and the level of access to each resource.
+
+IAM policy
+
+Useful mechanism to grant a set of permissions for 
+IAM role making AWS service requests. 
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 16
+
+
+
+Authenticate as an IAM user to gain access
+When you define an IAM user, you select what types of access the user is permitted to use. 
+
+Programmatic access
+• Authenticate using:
+
+• Access key ID
+
+• Secret access key AWS CLI AWS Tools 
+and SDKs
+
+• Provides AWS CLI and AWS SDK access
+
+AWS Management Console access
+• Authenticate using:
+
+• 12-digit Account ID or alias
+AWS Management 
+
+• IAM user name Console
+• IAM password
+
+• If enabled, multi-factor authentication (MFA) prompts for an authentication code.
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 17
+
+
+
+IAM MFA
+
+• MFA provides increased security.
+
+• In addition to username and password, MFA requires a unique authentication code to 
+access AWS services.
+
+Username and 
+password
+
+   
+
+MFA token
+
+AWS Management Console
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 18
+
+
+
+Authorization: What actions are permitted
+
+After the user or application is connected to the AWS account, what are they allowed to do?
+
+EC2 instances
+Full
+
+access
+
+Read-
+IAM user, only S3 bucket
+
+IAM group, 
+or IAM role
+
+IAM policies
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 19
+
+
+
+IAM: Authorization
+
+• Assign permissions by creating an IAM policy.
+
+• Permissions determine which resources and operations are allowed:
+
+• All permissions are implicitly denied by default.
+
+• If something is explicitly denied, it is never allowed.
+
+Best practice: Follow the principle of least privilege.
+IAM 
+
+permissions
+
+Note: The scope of IAM service configurations is global. Settings apply across all AWS Regions.
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 20
+
+
+
+IAM policies
+
+• An IAM policy is a document that defines permissions
+• Enables fine-grained access control
+
+• Two types of policies – identity-based and resource-based
+
+• Identity-based policies – IAM entities
+
+• Attach a policy to any IAM entity
+• An IAM user, an IAM group, or an IAM role Attach to 
+
+IAM user
+one of
+
+• Policies specify:
+• Actions that may be performed by the entity
+
+• Actions that may not be performed by the entity IAM policy IAM group
+
+• A single policy can be attached to multiple entities
+
+• A single entity can have multiple policies attached to it IAM role
+
+• Resource-based policies
+• Attached to a resource (such as an S3 bucket)
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 21
+
+
+
+IAM policy example
+
+{
+Explicit allow gives users access to a specific 
+
+"Version": "2012-10-17",
+DynamoDB table and…
+
+"Statement":[{
+"Effect":"Allow",
+"Action":["DynamoDB:*","s3:*"],
+"Resource":[
+
+"arn:aws:dynamodb:region:account-number-without-hyphens:table/table-name",
+"arn:aws:s3:::bucket-name", …Amazon S3 buckets.
+"arn:aws:s3:::bucket-name/*"] 
+
+}, Explicit deny ensures that the users cannot use any other AWS actions 
+{ or resources other than that table and those buckets.
+"Effect":"Deny",
+"Action":["dynamodb:*","s3:*"],
+"NotResource":["arn:aws:dynamodb:region:account-number-without-hyphens:table/table-name”,
+
+"arn:aws:s3:::bucket-name",
+"arn:aws:s3:::bucket-name/*"] 
+
+} An explicit deny statement takes precedence
+] over an allow statement.
+
+}
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 22
+
+
+
+Resource-based policies
+
+• Identity-based policies are attached to a 
+user, group, or role
+
+• Resource-based policies are attached to a AWS Account
+resource (not to a user, group or role)
+
+IAM user S3 bucket 
+• Characteristics of resource-based policies – MaryMajor photos
+
+• Specifies who has access to the resource and 
+attached Defined inline
+
+what actions they can perform on it on the bucket
+
+• The policies are inline only, not managed
+
+• Resource-based policies are supported only Identity-based Resource-based
+by some AWS services policy policy
+
+Policy grants list, Policy grants user 
+read objects to the MaryMajor list, read 
+
+photos bucket objects  
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 23
+
+
+
+IAM permissions
+
+How IAM determines permissions:
+
+Is the permission Is the permission 
+explicitly denied ? No explicitly allowed ? No Deny
+
+Implicit deny
+
+Yes Yes
+
+Deny Allow
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 24
+
+
+
+IAM groups
+
+• An IAM group is a collection of IAM users
+AWS account
+
+• A group is used to grant the same 
+permissions to multiple users
+
+IAM group: IAM group: IAM group:
+• Permissions granted by attaching IAM policy or Admins Developers Testers
+
+policies to the group
+Carlos Salazar Li Juan Zhang Wei
+
+• A user can belong to multiple groups
+Márcia Oliveira Mary Major John Stiles
+
+• There is no default group
+Richard Roe Li Juan
+
+• Groups cannot be nested
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 25
+
+
+
+IAM roles
+
+• An IAM role is an IAM identity with specific permissions
+• Similar to an IAM user
+
+• Attach permissions policies to it
+
+• Different from an IAM user IAM role
+
+• Not uniquely associated with one person
+
+• Intended to be assumable by a person, application, or service
+
+• Role provides temporary security credentials
+• Examples of how IAM roles are used to delegate access –
+
+• Used by an IAM user in the same AWS account as the role 
+
+• Used by an AWS service—such as Amazon EC2—in the same account as the role
+
+• Used by an IAM user in a different AWS account than the role
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 26
+
+
+
+Example use of an IAM role
+
+Scenario: 
+AWS Cloud
+
+• An application that runs on an EC2 instance Application has 
+
+needs access to an S3 bucket permissions to 
+Amazon EC2 instance access the S3 
+
+bucket
+
+Application
+Solution: 3
+
+Amazon S3 
+
+• Define an IAM policy that grants access to Role assumed by bucket 
+2
+
+the EC2 instance photos
+the S3 bucket. 
+
+• Attach the policy to a role
+attached
+
+• Allow the EC2 instance to assume the role IAM role 1 IAM policy 
+grants access to 
+photos bucket
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 27
+
+
+
+Section 2 key • IAM policies are constructed with JavaScript Object Notation 
+(JSON) and define permissions.
+
+takeaways • IAM policies can be attached to any IAM entity.
+
+• Entities are IAM users, IAM groups, and IAM roles.
+
+• An IAM user provides a way for a person, application, or 
+service to authenticate to AWS.
+
+• An IAM group is a simple way to attach the same policies to 
+multiple users.
+
+• An IAM role can have permissions policies attached to it and 
+can be used to delegate temporary access to users or 
+applications.
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 28
+
+
+
+Lab 1: 
+Introduction to IAM
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 29
+
+
+
+Lab 1: Tasks
+
+• Task 1: Explore the Users and Groups.
+
+• Task 2: Add Users to Groups.
+
+• Task 3: Sign-In and Test Users.
+AWS Identity and Access 
+
+Management (IAM)
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 30
+
+
+
+Lab 1: Final product 
+
+Account
+AWS account
+
+Users Groups
+
+user-1 user-2 user-3 EC2-Admin EC2-Support S3-Support
+
+user-2
+
+Amazon EC2 
+read-only access
+
+Amazon EC2 – IAM inline IAM managed 
+View, start, and policy policy S3 read-only 
+
+stop access access
+
+user-3 user-1
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 31
+
+
+
+~ 40 minutes
+
+Begin Lab 1: Introduction 
+to AWS IAM
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 32
+
+
+
+Lab debrief: 
+Key takeaways
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 33
+
+
+
+Section 5: Securing data on AWS
+Module 4: AWS Cloud Security
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved.
+
+
+
+Encryption of data at rest
+
+• Encryption encodes data with a secret key, which makes it unreadable
+• Only those who have the secret key can decode the data
+
+• AWS KMS can manage your secret keys
+
+• AWS supports encryption of data at rest
+• Data at rest = Data stored physically (on disk or on tape)
+
+• You can encrypt data stored in any service that is supported by AWS KMS, including:
+• Amazon S3
+
+• Amazon EBS
+
+• Amazon Elastic File System (Amazon EFS)
+
+• Amazon RDS managed databases
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 35
+
+
+
+Encryption of data in transit
+
+• Encryption of data in transit (data moving across a network)
+
+• Transport Layer Security (TLS)—formerly SSL—is an open standard protocol 
+
+• AWS Certificate Manager provides a way to manage, deploy, and renew TLS or SSL certificates 
+
+• Secure HTTP (HTTPS) creates a secure tunnel
+
+• Uses TLS or SSL for the bidirectional exchange of data
+
+• AWS services support data in transit encryption. 
+
+• Two examples:
+
+AWS Cloud Corporate data center AWS Cloud
+
+TLS encrypted
+data traffic TLS or SSL
+
+encrypted
+Amazon EC Amazon EFS AWS Storage Gateway Amazon S3
+
+2
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 36
+
+
+
+Securing Amazon S3 buckets and objects
+
+• Newly created S3 buckets and objects are private and protected by default.
+
+• When use cases require sharing data objects on Amazon S3 –
+• It is essential to manage and control the data access.
+
+• Follow the permissions that follow the principle of least privilege and consider using Amazon S3 
+encryption.
+
+• Tools and options for controlling access to S3 data include –
+• Amazon S3 Block Public Access feature: Simple to use.
+
+• IAM policies: A good option when the user can authenticate using IAM.
+
+• Bucket policies
+
+• Access control lists (ACLs): A legacy access control mechanism.
+
+• AWS Trusted Advisor bucket permission check: A free feature.
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 37
+
+
+
+Module wrap-up
+Module 4: AWS Cloud Security
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved.
+
+
+
+Module summary                                                     
+
+In summary, in this module you learned how to:
+• Recognize the shared responsibility model
+
+• Identify the responsibility of the customer and AWS
+
+• Recognize IAM users, groups, and roles
+
+• Describe different types of security credentials in IAM
+
+• Identify the steps to securing a new AWS account
+
+• Explore IAM users and groups
+
+• Recognize how to secure AWS data
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 39
+
+
+
+Complete the knowledge check
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 40
+
+
+
+Additional resources
+
+• AWS Cloud Security: https://aws.amazon.com/security/
+
+• AWS Security Resources: https://aws.amazon.com/security/security-learning/?cards-top.sort-
+by=item.additionalFields.sortDate&cards-top.sort-order=desc&awsf.Types=*all
+
+• AWS Security Blog: https://aws.amazon.com/blogs/security/
+
+• Security Bulletins : https://aws.amazon.com/security/security-bulletins/?card-body.sort-
+by=item.additionalFields.bulletinId&card-body.sort-order=desc&awsf.bulletins-
+flag=*all&awsf.bulletins-year=*all
+
+• Vulnerability and Penetration testing: https://aws.amazon.com/security/penetration-testing/
+
+• AWS Well-Architected Framework – Security pillar: 
+https://d1.awsstatic.com/whitepapers/architecture/AWS-Security-Pillar.pdf
+
+• AWS documentation - IAM Best Practices: 
+https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 41
+
+
+
+Thank you
+
+Corrections, feedback, or other questions? 
+Contact us at https://support.aws.amazon.com/#/contacts/aws-academy.
+All trademarks are the property of their owners.
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 42
+
+
+
+Sample exam question
+Which of the following is AWS's responsibility under the 
+AWS shared responsibility model?
+
+Choice Response
+
+A Configuring third-party applications
+
+B Maintaining physical hardware
+
+C Securing application access and data
+
+D Managing custom Amazon Machine Images (AMIs)
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 43
+
+
+
+Sample exam question answer
+Which of the following is AWS's responsibility under the 
+AWS shared responsibility model?
+
+The correct answer is B. 
+The keywords in the question are “AWS’s responsibility” and “AWS shared responsibility model”.
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 44

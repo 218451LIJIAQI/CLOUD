@@ -1,0 +1,482 @@
+﻿Chapter 1:
+Cloud Computing Concepts
+
+Semester 1 2025/2026
+By 
+Assoc. Prof. Ts. Dr. Novia Admodisastro
+Software Engineering & Information System 
+Department
+FSKTM, UPM
+
+
+
+Topic Outline
+
+• Definition of Cloud Computing 
+
+• Cloud Benefits
+
+• Cloud Vendors 
+
+• Cloud Computing Related (e.g. utility, grid, virtualisation, SOA 
+etc) 
+
+
+
+Course prerequisites
+
+• General Required Knowledge
+
+• IT technical knowledge
+
+• IT business knowledge
+
+• Preferred Knowledge
+
+• Working knowledge of distributed systems
+
+• Familiarity with general networking concepts
+
+• Working knowledge of multi-tier architectures
+
+3
+
+
+
+Section 1: Definition of Cloud Computing 
+Chapter 1: Cloud Computing Concepts
+
+
+
+IT needs to address these business 
+cIBhM ISaV alndl Deevenlopegr Reelatiosns 
+
+IT needs to address these business challenges 
+
+D•oDinogi nmgo rme woriteh  wleistsh  less 
+Reduc•e cRaepditaul ceexp ceanpdiitutarel seaxnpdeonpderiatutiorneasl and operational expenses 
+expenses 
+• Reducing risk 
+
+Redu•cEinngs urrisek t he right levels of security and resiliency across all business 
+Ensure the right levels of security and resiliency 
+
+data and processes 
+across all business data and processes 
+
+• Higher quality services 
+Higher quality services 
+
+• Improve quality of services and deliver new services that help the 
+Improve quality of services and deliver new services 
+that help bthues binuseisnse sgs rgoroww  aanndd  rreedudcuec ceo sctos sts 
+
+• Breakthrough agility 
+Breakthrough agility 
+
+• Increase ability to quickly deliver new services to capitalize on 
+Increase ability to quickly deliver new services to capitalize 
+on opporotupniptieosr twuhnileit cieosn twainhinilge  ccoostns taanidn imnagn acgoinsgts r isakn d managing risk 
+
+Cloud computing is one choice of models to address these challenges.   
+
+2 ClouIBdM  Incnovoatiomn Cepnteru– Dtaillans g is one choice of models t©o20 1a1 IBdM dCorrpoeratsions these challenges. 
+
+5
+
+
+
+CloudIBM  cISVoanmd Depveloupetr Rienlatigons delivers IT & business 
+bCelonuedf ictosmputing delivers IT & business benefits 
+
+Virtualized 
+Higher utilization 
+
+Economy of scale 
+benefits Doing more with less 
+
+Lower capital expense 
+Lower operating expense 
+
+Standardized 
+Easier access 
+
+Flexible pricing 
+Reuse and share Higher quality services 
+
+Easier to integrate 
+
+Automated 
+Faster cycle times 
+
+Lower support costs 
+Optimized utilization Breakthrough agility 
+
+Improved compliance Reducing risk 
+Optimized security 
+
+End user experience 
+
+3 IBM Innovation Center – Dallas © 2011 IBM Corporation6
+
+
+
+Cloud computing definition
+
+• National Institute of Standards and Technology (NIST) 
+definition: 
+
+“Cloud computing is a model for enabling ubiquitous, convenient, on-
+demand network access to a shared pool of configurable computing 
+resources (for example, networks, servers, storage, applications, and 
+services) that can be rapidly provisioned and released with minimal 
+management effort or service provider interaction.” 
+
+7
+
+
+
+Cloud computing defined 
+
+• Cloud computing is the on-demand delivery of compute power, 
+database, storage, applications, and other IT resources via the internet 
+with pay-as-you-go pricing.
+What is the cloud?
+
+On premises Internet
+
+Servers
+Cloud services provider
+
+Storage
+Servers Storage
+
+Databases
+Databases Applications
+
+Applications
+
+Corp
+network Internet
+
+© 2020, Amazon Web Services, Inc. or its af f iliates. All rights reserved.
+
+8
+
+
+
+Cloud computing defined 
+
+•HColowud  dporoevisd eitr  owwonsr kan?d maintains the network-connected hardware 
+
+• You provision and use what you need 
+
+• AWS owns and maintains the network-connected hardware
+
+• You provision and use what you need
+
+Storage Database Business
+Applicat ions
+
+Compute Networking Internet  
+& Content of Things
+Delivery
+
+Cloud is a d© 20e20, Almiazvon Weeb rSeyrvice s, aInc. nor itsd af f ili atces. Aoll rignhts rseseruved.mption model 
+
+9
+
+
+
+Infrastructure as software
+
+Cloud computing enables you to stop thinking of your infrastructure as
+hardware, and instead think of (and use) it as software.
+
+10
+
+
+
+Traditional computing 
+model
+
+• Infrastructure as hardware
+
+• Hardware solutions:
+• Require space, staff, physical 
+
+security, planning, capital 
+expenditure
+
+• Have a long hardware 
+procurement cycle
+
+• Require you to provision 
+capacity by guessing theoretical 
+maximum peaks
+
+11
+
+
+
+Cloud computing model
+
+• Infrastructure as software
+
+• Software solutions:
+• Are flexible
+• Can change more quickly, easily, 
+
+and cost-effectively than hardware 
+solutions
+
+• Eliminate the undifferentiated 
+heavy-lifting tasks
+
+12
+
+
+
+Section 2: Advantages of Cloud Computing
+Chapter 1: Cloud Concepts Overview
+
+
+
+Trade capital expense for variable expense
+
+Capital
+
+Data center investment Pay only for the amount 
+based on forecast you consume
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 14
+
+
+
+Massive economies of scale
+
+Because of aggregate usage from all customers, Cloud can achieve 
+higher economies of scale and pass savings on to customers.
+
+Cloud
+
+Economies of scale Savings
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 15
+
+
+
+Stop guessing capacity
+
+Overestimated Underestimated Scaling on 
+server capacity server capacity demand
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 16
+
+
+
+Increase speed and agility
+
+Launch
+
+Weeks between wanting Minutes between wanting 
+resources and having resources resources and having 
+
+resources
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 17
+
+
+
+Stop spending money on 
+running and maintaining data centers
+
+Investment
+
+Running data centers Business and customers
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 18
+
+
+
+Go global in minutes
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 19
+
+
+
+Refers Activity 1: Infographics Data 
+Centre
+
+20
+
+
+
+Cloud Data Center
+
+• A data center is a physical room, building or facility that 
+houses IT infrastructure for building, running, and delivering 
+applications and services, and for storing and managing the 
+data associated with those applications and services.
+
+• Click the link here to learn more about cloud data 
+centre. https://aws.amazon.com/compliance/data-center/
+
+21
+
+
+
+Section 3: Cloud Vendors 
+Chapter 1: Cloud Computing Concepts
+
+
+
+Worldwide market share of leading cloud 
+vendors
+
+Reference: [1]
+23
+
+
+
+Cloud vendors service comparison 
+
+Reference: [2][3]
+
+24
+
+
+
+Section 4: Cloud Computing Related
+Chapter 1: Cloud Computing Concepts
+
+
+
+Grid Computing 
+
+• Grid computing is a type of parallel and distributed system that 
+enables the sharing, selection, and aggregation of geographically 
+distributed "autonomous" resources dynamically at run-time 
+depending on their availability, capability, performance, cost, and 
+users' quality-of-service requirements. 
+
+• Grid computing is "a form of distributed computing and parallel 
+computing, whereby a 'super and virtual computer' is composed of a 
+cluster of networked, loosely-coupled computers acting in concert to 
+perform very large tasks." So the goal of grid computing is to divide a 
+single and large task among many loosely-coupled computers. 
+
+• Grid computing might run in a cloud computing environment. The 
+main difference is that, whereas grid computing is comprised of many 
+computers working together to achieve one goal, cloud computing is 
+aimed to provide computing resources for independent tasks. 
+
+26
+
+
+
+Utility Computing 
+
+• "Utility computing is the packaging of computing resources, such as 
+computation and storage, as a metered service similar to a traditional 
+public utility (such as electricity, water, natural gas, or telephone 
+network). This system has the advantage of a low or no initial cost to 
+acquire hardware; instead, computational resources are essentially 
+rented. Customers with very large computations or a sudden peak in 
+demand can also avoid the delays that would result from physically 
+acquiring and assembling a large number of computers." 
+
+27
+
+
+
+Utility Computing (cont.)
+
+• "Utility computing relates to the business model in which application 
+infrastructure resources – hardware and/or software – are delivered. 
+• While cloud computing relates to the way we design, build, deploy and run 
+
+applications that operate in a visualized environment, sharing resources and 
+boasting the ability to dynamically grow, shrink, and self-heal." 
+
+• Utility Billing
+• Subscription – magazines, newspapers 
+• Resource-based
+• Utility – electricity, water (usage-based)
+
+28
+
+
+
+Energy Savings in Cloud Computing 
+
+• Physical systems require energy even when they are not fully utilized. 
+Furthermore, this energy is turned into heat, which must be removed 
+from the Data Center. Additionally, energy may be more expensive in 
+some places than others. 
+
+• Maximizing CPU usage by allowing rapid consolidation of VMs to shut 
+down surplus systems results in savings on cooling. Multiple virtual 
+assets can share the same physical resources to better utilize energy. 
+As requirements diminish, even on an hourly basis, virtual assets can 
+be consolidated allowing physical assets to be shut down. Then when 
+requirements increase, physical assets can be brought online to meet 
+demand. 
+
+• Cloud computing also allows for the ability to move visualized assets 
+to run on physical assets in a location where energy is cheaper (such as 
+closer to a generation station) or where cooling is easier. Virtual assets 
+can be quickly migrated to take advantage of changes in energy 
+pricing/availability. 
+
+29
+
+
+
+Takeaway
+
+• Cloud computing is the on-demand delivery of IT resources via 
+the internet with pay-as-you-go pricing.
+
+• Cloud computing enables you to think of (and use) your 
+infrastructure as software.
+
+• Almost anything you can implement with traditional IT can also 
+be implemented as an AWS cloud computing service.
+
+• There are six benefits discussed of cloud computing.
+• Businesses often seek to find the best cloud solution to fit their 
+
+unique organizational needs. A large part of this decision is 
+selecting a cloud service provider and major cloud service 
+providers includes Amazon Web Services (AWS), Microsoft 
+Azure and  Google Cloud Services. 
+
+• Cloud computing is based on several other computing areas 
+such as Grid Computing and Utility Computing.
+
+
+
+Refers Quiz 1: Get Ready to Answer Questions
+
+31
+
+
+
+External References
+
+• [1] https://www.statista.com/chart/18819/worldwide-market-
+share-of-leading-cloud-infrastructure-service-providers/
+
+• [2] https://blogs.vmware.com/cloudhealth/aws-vs-azure-vs-
+google/
+
+• [3] https://www.comptia.org/content/articles/cloud-types-
+solutions-and-vendors
+
+• https://blog.ahasayen.com/cloud-reference-architecture-
+cra1/#:~:text=The%20Cloud%20Reference%20Architecture%20(
+CRA)%20serves%20as%20a%20collection%20of,in%20mind%20
+from%20day%20one.
+
+32

@@ -1,0 +1,872 @@
+﻿Module 7: Storage
+AWS Academy Cloud Foundations
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved.
+
+
+
+Module overview
+Topics Demos
+• Amazon Elastic Block Store (Amazon EBS) • Amazon EBS console
+
+• Amazon S3 console
+• Amazon Simple Storage Service (Amazon 
+
+S3) • Amazon EFS console
+• Amazon S3 Glacier console
+Lab
+• Working with Amazon EBS
+Activities
+• Storage solution case study
+
+Knowledge check
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 2
+
+
+
+Module objectives
+After completing this module, you should be able to:
+• Identify the different types of storage
+• Explain Amazon S3
+• Identify the functionality in Amazon S3
+• Explain Amazon EBS
+• Identify the functionality in Amazon EBS
+• Perform functions in Amazon EBS to build an Amazon EC2 storage solution 
+• Explain Amazon EFS
+• Identify the functionality in Amazon EFS
+• Explain Amazon S3 Glacier
+• Identify the functionality in Amazon S3 Glacier
+• Differentiate between Amazon EBS, Amazon S3, Amazon EFS, and Amazon S3 Glacier
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 3
+
+
+
+Core AWS services
+
+Amazon S3 Amazon 
+EBS
+
+Amazon Amazon S3 
+EFS Glacier
+
+Amazon Virtual Amazon Elastic AWS Identity and Access 
+Private Cloud Compute Cloud Storage Management (IAM)
+(Amazon VPC) (Amazon EC2)
+
+Amazon Relational Amazon 
+Database Service DynamoDB
+
+Database
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 4
+
+
+
+Section 1: Amazon Elastic Block Store 
+(Amazon EBS)
+Module 7: Storage
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved.
+
+
+
+Storage
+
+Amazon Elastic Block Store 
+(Amazon EBS)
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 6
+
+
+
+AWS storage options: Block storage versus object storage
+
+What if you want to change one character in a 1-GB file?
+
+Block storage Object storage
+Change one block (piece of the file) Entire file must be updated
+
+that contains the character
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 7
+
+
+
+Amazon EBS
+Amazon EBS enables you to create individual storage volumes and attach 
+them to an Amazon EC2 instance:
+• Amazon EBS offers block-level storage.
+• Volumes are automatically replicated within its Availability Zone.
+• It can be backed up automatically to Amazon S3 through snapshots.
+• Uses include – 
+
+• Boot volumes and storage for Amazon Elastic Compute Cloud (Amazon EC2) instances
+• Data storage with a file system
+• Database hosts
+• Enterprise applications
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 8
+
+
+
+Amazon EBS volume types
+
+Solid State Drives (SSD) Hard Disk Drives (HDD)
+General Purpose Provisioned IOPS Throughput- Cold
+
+Optimized
+Maximum Volume Size 16 TiB 16 TiB 16 TiB 16 TiB
+Maximum IOPS/Volume 16,000 64,000 500 250
+Maximum 250 MiB/s 1,000 MiB/s 500 MiB/s 250 MiB/s
+Throughput/Volume
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 9
+
+
+
+Amazon EBS volume type use cases
+Solid State Drives (SSD) Hard Disk Drives (HDD)
+
+General Purpose Provisioned IOPS Throughput-Optimized Cold
+• This type is recommended • Critical business • Streaming workloads that • Throughput-oriented 
+
+for most workloads applications that require require consistent, fast storage for large volumes of 
+sustained IOPS throughput at a low price data that is infrequently 
+performance, or more than accessed
+16,000 IOPS or 250 
+MiB/second of throughput 
+per volume
+
+• System boot volumes • Large database workloads • Big data • Scenarios where the lowest 
+storage cost is important
+
+• Virtual desktops • Data warehouses • It cannot be a boot volume
+• Low-latency interactive 
+
+applications • Log processing
+
+• Development and test 
+environments • It cannot be a boot volume
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 10
+
+
+
+Amazon EBS features
+• Snapshots – 
+
+• Point-in-time snapshots
+• Recreate a new volume at any time
+
+• Encryption – 
+• Encrypted Amazon EBS volumes
+• No additional cost
+
+• Elasticity – 
+• Increase capacity
+• Change to different types
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 11
+
+
+
+Amazon EBS: Volumes, IOPS, and pricing
+1. Volumes – 
+
+• Amazon EBS volumes persist independently from the instance.
+• All volume types are charged by the amount that is provisioned per month.
+
+2. IOPS – 
+• General Purpose SSD:
+
+• Charged by the amount that you provision in GB per month until storage is released.
+• Magnetic:
+
+• Charged by the number of requests to the volume.
+• Provisioned IOPS SSD:
+
+• Charged by the amount that you provision in IOPS (multiplied by the percentage of days 
+that you provision for the month).
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 12
+
+
+
+Amazon EBS: Snapshots and data transfer
+3. Snapshots – 
+
+• Added cost of Amazon EBS snapshots to Amazon S3 is per GB-month of 
+data stored.
+
+4. Data transfer – 
+• Inbound data transfer is free.
+• Outbound data transfer across Regions incurs charges.
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 13
+
+
+
+Section 1 key Amazon EBS features:
+takeaways • Persistent and customizable block storage for 
+
+Amazon EC2
+• HDD and SSD types
+• Replicated in the same Availability Zone
+• Easy and transparent encryption
+• Elastic volumes
+• Back up by using snapshots
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 14
+
+
+
+Recorded demo:
+Amazon Elastic 
+
+Block Store 
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 15
+
+
+
+Lab 4: 
+Working with 
+Amazon EBS
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 16
+
+
+
+Lab 4: Scenario
+This lab is designed to show you how to create an Amazon EBS volume. After 
+you create the volume, you will attach the volume to an Amazon EC2 instance, 
+configure the instance to use a virtual disk, create a snapshot and then restore 
+from the snapshot.
+
+Attached Created
+Amazon EC2 Amazon EBS Snapshot
+
+instance
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 17
+
+
+
+Lab 4: Final product
+
+Attached Created
+Amazon Amazon Snapshot
+
+EC2 EBS
+instance
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 18
+
+
+
+~ 30 minutes
+
+Begin Lab 4: Working 
+with Amazon EBS
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 19
+
+
+
+Lab debrief: 
+Key takeaways
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 20
+
+
+
+Section 2: Amazon Simple Storage 
+Service (Amazon S3) 
+Module 7: Storage
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved.
+
+
+
+Storage
+
+Amazon Simple Storage Service 
+(Amazon S3)
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 22
+
+
+
+Amazon S3 overview
+
+• Data is stored as objects in buckets
+• Virtually unlimited storage
+
+• Single object is limited to 5 TB
+• Designed for 11 9s of durability (99.999999999%)
+• Granular access to bucket and objects 
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 23
+
+
+
+Amazon S3 storage classes
+Amazon S3 offers a range of object-level storage classes that are designed 
+for different use cases:
+
+• Amazon S3 Standard
+• Amazon S3 Intelligent-Tiering
+• Amazon S3 Standard-Infrequent Access (Amazon S3 Standard-IA)
+
+• Amazon S3 One Zone-Infrequent Access (Amazon S3 One Zone-IA)
+• Amazon S3 Glacier 
+• Amazon S3 Glacier Deep Archive
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 24
+
+
+
+Amazon S3 bucket URLs (two styles)
+Amazon S3 To upload your data: 
+
+1. Create a bucket in an AWS Region.
+2. Upload almost any number of objects to the bucket.
+
+Bucket path-style URL endpoint: 
+[bucket name] https://s3.ap-northeast-1.amazonaws.com/bucket-name
+
+Region code Bucket name
+
+Bucket virtual hosted-style URL endpoint:
+Preview2.mp4 https:// bucket-name.s3-ap-northeast-1.amazonaws.com
+
+Tokyo Region (ap-
+northeast-1) Bucket name Region code 
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 25
+
+
+
+Data is redundantly stored in the Region
+
+media/welcome.mp4
+Facility 1 Facility 2 Facility 3
+
+my-bucket-name
+
+Region
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 26
+
+
+
+Designed for seamless scaling
+
+media/welcome.mp4 prod2.mp4 prod3.mp4 prod4.mp4
+
+prod5.mp4 prod6.mp4 prod7.mp4 prod8.mp4
+
+my-bucket-name
+
+prod9.mp4 prod10.mp4 prod11.mp4 prod12.mp4
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 27
+
+
+
+Access the data anywhere
+
+AWS Management 
+Console AWS Command Line SDK
+
+Interface
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 28
+
+
+
+Common use cases
+• Storing application assets
+• Static web hosting
+• Backup and disaster recovery (DR)
+• Staging area for big data
+• Many more….
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 29
+
+
+
+Amazon S3 common scenarios
+
+• Backup and storage
+
+• Application hosting
+• Media hosting Amazon S3 buckets
+
+• Software delivery
+Corporate
+
+data center
+Amazon 
+
+EC2
+instances
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 30
+
+
+
+Amazon S3 pricing 
+• Pay only for what you use, including – 
+
+• GBs per month
+• Transfer OUT to other Regions
+• PUT, COPY, POST, LIST, and GET requests
+
+• You do not pay for – 
+• Transfers IN to Amazon S3
+• Transfers OUT from Amazon S3 to Amazon CloudFront or Amazon EC2 in the same 
+
+Region
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 31
+
+
+
+Amazon S3: Storage pricing (1 of 2)
+To estimate Amazon S3 costs, consider the following:
+1. Storage class type – 
+
+• Standard storage is designed for:
+• 11 9s of durability
+• Four 9s of availability
+
+• S3 Standard-Infrequent Access (S-IA) is designed for:
+• 11 9s of durability
+• Three 9s of availability
+
+2. Amount of storage – 
+• The number and size of objects
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 32
+
+
+
+Amazon S3: Storage pricing (2 of 2)
+3. Requests – 
+
+• The number and type of requests (GET, PUT, COPY)
+• Type of requests:
+
+• Different rates for GET requests than other requests.
+4. Data transfer – 
+
+• Pricing is based on the amount of data that is transferred out of the 
+Amazon S3 Region
+• Data transfer in is free, but you incur charges for data that is transferred out.
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 33
+
+
+
+Section 3: Amazon Elastic File System 
+(Amazon EFS) 
+Module 7: Storage
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved.
+
+
+
+Storage
+
+Amazon Elastic File System 
+(Amazon EFS)
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 35
+
+
+
+Amazon EFS features
+• File storage in the AWS Cloud 
+• Works well for big data and analytics, media processing workflows, content 
+
+management, web serving, and home directories
+• Petabyte-scale, low-latency file system
+• Shared storage
+• Elastic capacity
+• Supports Network File System (NFS) versions 4.0 and 4.1 (NFSv4)
+• Compatible with all Linux-based AMIs for Amazon EC2
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 36
+
+
+
+Amazon EFS architecture
+
+VPC
+
+Availability Zone A Availability Zone B Availability Zone C
+Private subnet Private subnet Private subnet
+
+Network Network Network 
+Interface Interface Interface
+
+Private subnet
+Network Network 
+Interface Interface Network 
+
+Interface
+Mount target Mount target Mount target
+
+Elastic File System
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 37
+
+
+
+Amazon EFS architecture
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 38
+
+
+
+Amazon EFS implementation
+1 Create your Amazon EC2 resources and launch your Amazon EC2 instance.
+
+2 Create your Amazon EFS file system.
+
+3 Create your mount targets in the appropriate subnets. 
+
+4 Connect your Amazon EC2 instances to the mount targets.
+
+5 Verify the resources and protection of your AWS account.
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 39
+
+
+
+Amazon EFS resources
+File system
+
+• Mount target
+• Subnet ID
+• Security groups
+• One or more per file system
+• Create in a VPC subnet
+• One per Availability Zone
+• Must be in the same VPC
+
+• Tags
+• Key-value pairs
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 40
+
+
+
+Section 3 key • Amazon EFS provides file storage over a network.
+
+takeaways • Perfect for big data and analytics, media processing 
+workflows, content management, web serving, and 
+home directories.
+
+• Fully managed service that eliminates storage 
+administration tasks.
+
+• Accessible from the console, an API, or the CLI.
+• Scales up or down as files are added or removed and 
+
+you pay for what you use.
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 41
+
+
+
+Recorded demo:
+Amazon Elastic File 
+
+System
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 42
+
+
+
+Section 4: Amazon S3 Glacier 
+Module 7: Storage
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved.
+
+
+
+Storage
+
+Amazon S3 Glacier
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 44
+
+
+
+Amazon S3 Glacier review (archive, vault, vault access policy)
+Amazon S3 Glacier is a data archiving service that is designed for security, 
+durability, and an extremely low cost.
+• Amazon S3 Glacier is designed to provide 11 9s of durability for objects.
+• It supports the encryption of data in transit and at rest through Secure Sockets Layer 
+
+(SSL) or Transport Layer Security (TLS).
+
+• The Vault Lock feature enforces compliance through a policy.
+
+• Extremely low-cost design works well for long-term archiving.
+• Provides three options for access to archives—expedited, standard, and bulk—retrieval 
+
+times range from a few minutes to several hours.
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 45
+
+
+
+Amazon S3 Glacier
+
+• Storage service for low-cost data 
+archiving and long-term backup 
+
+• You can configure lifecycle archiving 
+Archive after Delete after 5 
+
+of Amazon S3 content to Amazon S3 30 days years
+Glacier
+
+Amazon S3 Amazon S3 
+• Retrieval options – bucket Glacier 
+
+Archive
+• Standard: 3–5 hours
+• Bulk: 5–12 hours
+• Expedited: 1–5 minutes
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 46
+
+
+
+Amazon S3 Glacier use cases
+
+Media asset archiving
+
+Healthcare information archiving
+
+Regulatory and compliance archiving
+
+Scientific data archiving
+
+Digital preservation
+
+Magnetic tape replacement
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 47
+
+
+
+Using Amazon S3 Glacier
+
+RESTful
+web services
+
+Java or .NET 
+SDKs
+
+Amazon S3 with 
+lifecycle policies
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 48
+
+
+
+Lifecycle policies
+Amazon S3 lifecycle policies enable you to delete or move objects based on 
+age.
+
+Amazon S3 Amazon S3 Amazon Delete
+Standard Standard - S3 Glacier
+
+Infrequent Access
+
+30 days 60 days 365 days
+
+Preview2.mp4 Preview2.mp4 Preview2.mp4
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 49
+
+
+
+Storage comparison
+Amazon S3 Amazon S3 Glacier
+
+Data Volume No limit No limit
+Average Latency ms minutes/hours
+Item Size 5 TB maximum 40 TB maximum
+Cost/GB per Month Higher cost Lower cost
+
+Billed Requests PUT, COPY, POST, LIST, 
+and GET UPLOAD and retrieval
+
+Retrieval Pricing ¢ ¢¢
+Per request Per request and per GB
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 50
+
+
+
+Server-side encryption
+
+Corporate AWS Cloud
+data center
+
+https Your Applications on
+Amazon EC2 Amazon EC2
+
+AWS Cloud
+
+Data is encrypted Your application must
+by default enable server-side encryption
+
+Amazon S3 Glacier Amazon S3
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 51
+
+
+
+Security with Amazon S3 Glacier
+
+Control access with 
+IAM
+
+Amazon S3 Glacier encrypts 
+your data with AES-256
+
+Amazon S3 
+Glacier
+
+Amazon S3 Glacier manages 
+your keys for you
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 52
+
+
+
+Section 4 key • Amazon S3 Glacier is a data archiving service 
+takeaways that is designed for security, durability, and an 
+
+extremely low cost.
+• Amazon S3 Glacier pricing is based on Region.
+• Its extremely low-cost design works well for 
+
+long-term archiving. 
+• The service is designed to provide 11 9s of 
+
+durability for objects.
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 53
+
+
+
+Section 2 key • Amazon S3 is a fully managed cloud storage 
+takeaways service.
+
+• You can store a virtually unlimited number of 
+objects.
+
+• You pay for only what you use.
+• You can access Amazon S3 at any time from 
+
+anywhere through a URL.
+• Amazon S3 offers rich security controls.
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 54
+
+
+
+Recorded demo:
+Amazon Simple 
+Storage  System
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 55
+
+
+
+Activity: Storage Case 
+Studies
+
+Photo by Pixabay from Pexels.
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 56
+
+
+
+Module wrap-up
+Module 7: Storage
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved.
+
+
+
+Module summary 
+In summary, in this module, you learned how to:
+• Identify the different types of storage
+• Explain Amazon S3
+• Identify the functionality in Amazon S3
+• Explain Amazon EBS
+• Identify the functionality in Amazon EBS
+• Perform functions in Amazon EBS to build an Amazon EC2 storage solution 
+• Explain Amazon EFS
+• Identify the functionality in Amazon EFS
+• Explain Amazon S3 Glacier
+• Identify the functionality in Amazon S3 Glacier
+• Differentiate between Amazon EBS, Amazon S3, Amazon EFS, and Amazon S3 Glacier
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 61
+
+
+
+Complete the knowledge check
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 62
+
+
+
+Additional resources
+• AWS Storage page: https://aws.amazon.com/products/storage/
+
+• Storage Overview: https://docs.aws.amazon.com/whitepapers/latest/aws-overview/storage-services.html
+
+• Recovering files from an Amazon EBS volume backup: https://aws.amazon.com/blogs/compute/recovering-
+files-from-an-amazon-ebs-volume-backup/
+
+• Confused by AWS Storage Options? S3, EFS, EBS Explained: https://dzone.com/articles/confused-by-aws-
+storage-options-s3-ebs-amp-efs-explained 
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 63
+
+
+
+Thank you
+
+Corrections, feedback, or other questions? 
+Contact us at https://support.aws.amazon.com/#/contacts/aws-academy.
+All trademarks are the property of their owners.
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 64
+
+
+
+Sample exam question
+A company wants to store data that is not frequently accessed. What is the best and cost-effective solution that 
+should be considered?
+
+Choice Response
+
+A AWS Storage Gateway
+
+B Amazon Simple Storage Service Glacier
+
+C Amazon Elastic Block Store (Amazon EBS)
+
+D Amazon Simple Storage Service (Amazon S3)
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 65

@@ -1,0 +1,1127 @@
+﻿Chapter 7: 
+Deployment And Testing On 
+
+Cloud Platform 
+
+Semester 1 2025/2026
+
+By 
+
+Assoc. Prof. Ts. Dr. Novia Admodisastro
+
+Software Engineering & Information System Department
+
+FSKTM, UPM
+
+
+
+Topic Outline
+
+• Customer-managed vs Cloud-managed
+
+• Load Balancing
+
+• Monitoring and Capacity Provisioning
+
+• Auto-Scaling
+
+• Cloud Testing
+
+
+
+Section 1: Customer-managed vs Cloud-
+managed
+Chapter 7: Deployment And Testing On Cloud Platform
+
+
+
+Unmanaged versus managed services
+
+Unmanaged: Managed:
+
+Scaling, fault tolerance, and Scaling, fault tolerance, and 
+availability are managed by availability are typically built 
+
+you. into the service.
+
+4
+
+
+
+Unmanaged versus managed services
+Unmanaged Managed
+• Unmanaged services are typically • Managed services require the 
+
+provisioned in discrete portions as user to configure them. 
+specified by the user.
+
+• However, managed services 
+• User must manage how the service typically require less 
+
+responds to changes in load, errors, configuration. 
+and situations where resources 
+
+• Ex., user create an Amazon 
+become unavailable. Simple Storage Service (Amazon 
+
+• Ex., launching a web server on an S3) bucket and then set 
+Amazon Elastic Computer Cloud (EC2) permissions for it. 
+instance. Because Amazon EC2 is an • Host a static website host in a 
+unmanaged solution, that web server cloud-based storage solution, 
+will not scale to handle increased Amazon S3. 
+
+traffic load or replace unhealthy • The static website does not have 
+a web server.
+
+instances with healthy ones unless you 
+• However, because Amazon S3 is 
+
+specify that it use a scaling solution, a managed solution, features
+such as AWS Automatic Scaling. such as scaling, fault-tolerance, 
+
+and availability would be handled 
+• The benefit to using an unmanaged automatically and internally by 
+
+service is that user have more fine- Amazon S3. 
+tuned control over how user solution 
+handles changes in load, errors, and 
+situations where resources become 
+
+5
+unavailable.
+
+
+
+Scenario: Amazon Relational Database Service (RDS)
+Challenges of relational databases
+• Server maintenance and energy 
+
+footprint
+
+• Software installation and patches
+
+• Database backups and high availability
+
+• Limits on scalability
+
+• Data security
+
+• Operating system (OS) installation and 
+patches
+
+6
+
+
+
+Amazon RDS
+
+Managed service that sets up and operates a relational database in 
+the cloud.
+
+AWS Cloud
+
+Users Application
+Servers Amazon RDS
+
+7
+
+
+
+From on-premises databases to Amazon RDS
+
+Database in Amazon Elastic 
+Database in Amazon RDS 
+
+On-premises database Compute Cloud (Amazon 
+or Amazon Aurora
+
+EC2) 
+
+Application optimization Application optimization Application optimization
+Scaling Scaling Scaling
+High Availability High Availability High Availability
+Database backups Database backups Database backups
+Database software Database software Database software 
+patches patches AWS patches
+Database software Database software provides Database software 
+installs installs installs
+Operation system Operation system Operation system 
+patches patches patches
+Operating system install AWS Operating system install Operating system install
+Server maintenance Server maintenance
+
+provides Server maintenance
+Rack and stack servers Rack and stack servers Rack and stack servers
+Power, HVAC, network Power, HVAC, network Power, HVAC, network
+
+8
+
+
+
+Managed services responsibilities
+
+You manage:
+
+• Application optimization
+
+AWS manages:
+
+• OS installation and patches
+
+• Database software installation and patches
+
+• Database backups
+
+• High availability Amazon RDS
+• Scaling
+
+• Power and racking and stacking servers
+
+• Server maintenance
+
+9
+
+
+
+The right tool for the right job
+
+What are my requirements?
+
+Enterprise-class relational database Amazon RDS
+
+Fast and flexible NoSQL database service for any scale Amazon DynamoDB
+
+Operating system access or application features that Databases on Amazon 
+are not supported by AWS database services EC2
+
+Specific case-driven requirements (machine learning, AWS purpose-built 
+data warehouse, graphs) database services
+
+10
+
+
+
+Quiz 1
+Which of the following is a fully-managed NoSQL database service?
+
+Choice Response
+
+A Amazon Relational Database Service (Amazon RDS)
+
+B Amazon DynamoDB
+
+C Amazon Aurora
+
+D Amazon Redshift
+
+11
+
+
+
+Section 2: Load Balancing
+Chapter 7: Deployment And Testing On Cloud Platform
+
+
+
+Elastic Load Balancing
+• Modern high-traffic websites 
+
+must serve hundreds of 
+thousands—if not millions—of 
+concurrent requests from users 
+or clients, and then return the 
+correct text, images, video, or 
+application data in a fast and Elastic Load
+
+reliable manner. Additional Balancing
+
+servers are generally required to 
+meet these high volumes.
+
+IP addresses
+• Distributes incoming application 
+
+Containers
+or network traffic across multiple EC2 instances Lambda functions
+
+targets in a single Availability 
+Zone or across multiple 
+Availability Zones.
+
+• Scales your load balancer as 
+traffic to your application 
+changes over time. 13
+
+
+
+Types of load balancers
+
+14
+
+
+
+Elastic Load Balancing use cases
+
+Highly available and Containerized Elasticity 
+fault-tolerant applications and scalability
+applications
+
+Virtual private Hybrid environments Invoke Lambda 
+cloud (VPC) functions over HTTP(S)
+
+15
+
+
+
+How Amazon Elastic Load Balancing works
+
+• With Application Load 
+Balancers and Network 
+Load Balancers, you register 
+targets in target groups, and AWS Cloud
+route traffic to the target Load balancer accepts 
+
+incoming traffic 
+groups. Availability Zone A Availability Zone B
+
+from clients.
+
+• With Classic Load Balancers, 
+you register instances with 
+the load balancer. Listener checks for 
+
+Listener connection requests. Listener
+
+Load balancer routes
+Load balancer traffic only to 
+performs health  . healthy targets.  .  .  .
+checks to Target TXarget Target Target Target
+monitor health of 
+registered 
+targets.
+
+16
+
+
+
+Activity: Elastic Load Balancing
+
+You must support traffic to a containerized 
+application.
+
+You have extremely spiky and unpredictable 
+TCP traffic.
+
+You need simple load balancing with multiple 
+protocols.
+
+You need to support a static or Elastic IP 
+address, or an IP target outside a VPC.
+
+You need a load balancer that can handle 
+millions of requests per second while 
+maintaining low latencies.
+
+You must support HTTPS requests.
+
+17
+
+
+
+AWS Load balancer monitoring
+
+• Amazon CloudWatch metrics – Used to 
+verify that the system is performing as 
+expected and creates an alarm to initiate 
+an action if a metric goes outside an 
+acceptable range.
+
+• Access logs – Capture detailed 
+information about requests sent to your 
+load balancer.
+
+• AWS CloudTrail logs – Capture the who, 
+what, when, and where of API interactions 
+in AWS services. 
+
+18
+
+
+
+High availability
+
+• System can withstand some measure of degradation while still 
+remaining available.
+
+• Downtime is minimized.
+
+• Minimal human intervention is required.
+
+19
+
+
+
+Availability tiers
+
+20
+
+
+
+Factors that influence availability
+
+Fault tolerance Recoverability
+
+• The built-in redundancy of an • The process, policies, and 
+application's components and procedures that are related to 
+its ability to remain restoring service after a 
+operational. catastrophic event.
+
+Scalability
+
+• The ability of an application 
+to accommodate increases in 
+capacity needs without 
+changing design.
+
+21
+
+
+
+Section 3: Monitoring
+Chapter 7: Deployment And Testing On Cloud Platform
+
+
+
+Monitoring Resources
+
+To use cloud resources efficiently, cloud consumers need insight 
+into the Cloud resources:
+
+• How do you know when you should launch more Amazon EC2 
+instances?
+
+• Is your application's performance or availability being 
+affected by a lack of sufficient capacity?
+
+• How much of your infrastructure is actually being used?
+
+How do you capture this information?
+
+23
+
+
+
+Amazon CloudWatch Amazon
+CloudWatch
+
+• Amazon CloudWatch is a • Monitors –
+monitoring and • AWS resources 
+observability service that • Applications that run on AWS
+is built for DevOps • Collects and tracks –
+engineers, developers, site • Standard metrics
+reliability engineers (SRE), • Custom metrics
+and IT managers. 
+
+• Alarms –
+• CloudWatch monitors 
+
+• Send notifications to an 
+AWS resources (and the Amazon SNS topic
+applications that run on • Perform Amazon EC2 Auto 
+AWS) in real time. Scaling or Amazon EC2 actions
+
+• Use CloudWatch to collect • Events –
+and track metrics, which 
+
+• Define rules to match changes 
+are variables that can in AWS environment and route 
+measure for cloud these events to one or more 
+resources and target functions or streams for 
+
+applications. processing
+
+24
+
+
+
+Create an alarm based on a static 
+CloudWatch alarms threshold, choose a CloudWatch metric for 
+
+the alarm to watch and the threshold for 
+• Create alarms based on – that metric. 
+
+• Static threshold The alarm goes to ALARM state when the 
+• Anomaly detection metric breaches the threshold for a 
+
+• Metric math expression specified number of evaluation periods. 
+
+• Specify –
+• Namespace e.g., AWS/EC2
+• Metric e.g., CPU Utilisation
+• Statistic e.g., average, sum, 
+
+minimum, maximum, sample 
+count, a predefined percentile, 
+or a custom percentile
+
+• Period e.g., 5 mins
+• Conditions e.g., Greater, 
+
+Greater or Equal, Lower or 
+Equal, or Lower than the 
+threshold value
+
+• Additional configuration
+• Actions e.g., notification to an 
+
+Amazon SNS topic, or to 
+perform an Amazon EC2 Auto 
+Scaling action or Amazon EC2 
+action. 25
+
+
+
+Activity: Amazon CloudWatch
+
+If average CPU utilization is > 60% for 5 
+minutes…
+
+Amazon EC2
+
+If the number of simultaneous connections 
+is > 10 for 1 minute…
+
+Amazon RDS
+
+If the maximum bucket size in bytes is 
+around 3 for 1 day…
+
+Amazon S3
+
+If the number of healthy hosts is < 5 for 10 
+minutes…
+
+Elastic Load Balancing
+
+If the volume of read operations is > 1,000 
+for 10 seconds…
+
+Amazon Elastic 
+Block Store
+
+26
+
+
+
+Section 4: Auto Scaling
+Chapter 7: Deployment And Testing On Cloud Platform
+
+
+
+Why is scaling important?
+
+Unused Over
+
+capacity capacity
+
+Su    M     T     W     Th     F     Sa Su    M     T     W     Th     F     Sa
+
+Used capacity Provisioned capacity
+(demand)
+
+28
+
+
+
+Why is scaling important?
+
+• Scaling is the ability to increase or decrease the compute capacity of 
+your application. 
+
+• To understand why scaling is important, consider this example of a 
+workload that has varying resource requirements. In this example, the most 
+resource capacity is required on Wednesday, and the least resource 
+capacity is required on Sunday. 
+
+• One option is to allocate more than enough capacity so you can always 
+meet your highest demand—in this case, Wednesday. However, this 
+situation means that you are running resources that will be underutilized 
+most days of the week. With this option, your costs are not optimized.
+
+• Another option is to allocate less capacity to reduce costs. This situation 
+means that you are under capacity on certain days. If you don't solve your 
+capacity problem, your application could underperform or potentially even 
+become unavailable for users. 
+
+29
+
+
+
+Amazon EC2 Auto Scaling Amazon EC2 
+Auto Scaling
+
+• Helps you maintain application 
+availability
+
+• Enables you to automatically 
+add or remove EC2 instances 
+according to conditions that you 
+define
+
+• Detects impaired EC2 instances 
+and unhealthy applications, and 
+replaces the instances without 
+your intervention
+
+• Provides several scaling options:
+Su    M     T     W     Th     F     Sa • Manual, 
+
+• Scheduled, 
+Used capacity Provisioned capacity • Dynamic or on-demand
+(demand) • Predictive
+
+• Dynamic scaling and predictive
+scaling can be used together to 
+scale faster.
+
+30
+
+
+
+(1) Automatic scaling is also useful for dynamic on-demand 
+scaling. 
+
+November traffic to Amazon.com
+
+Provisioned capacity 76 percent
+
+The challenge is to efficiently guess 
+the unknown quantity of how much 
+
+compute capacity you need.
+
+24 percent
+November
+
+Amazon.com experiences a seasonal peak in traffic in November (on Black Friday and Cyber Monday, which 
+are days at the end of November when US retailers hold major sales). If Amazon provisions a fixed capacity to 
+accommodate the highest use, 76 percent of the resources are idle for most of the year. Capacity scaling is 
+necessary to support the fluctuating demands for service. Without scaling, the servers could crash due to 
+saturation, and the business would lose customer confidence. 31
+
+
+
+Typical weekly traffic at Amazon.com
+
+Provisioned capacity
+
+Sunday Monday Tuesday Wednesday Thursday Friday Saturday
+
+(2) Automatic scaling is useful for predictable workloads
+
+32
+
+
+
+Auto Scaling groups
+
+• An Auto Scaling group is a 
+collection of EC2 instances 
+
+Auto Scaling group
+that are treated as a logical 
+grouping for the purposes 
+of automatic scaling and 
+management.
+
+Minimum size Launch or terminate • The size of an Auto Scaling 
+instances as needed
+
+group depends on the 
+Desired capacity number of instances you set 
+
+as the desired capacity. 
+Maximum size • The size can be adjusted to 
+
+meet demand, either 
+For example, this Auto Scaling group has a minimum size manually or by using 
+of one instance, a desired capacity of two instances, and 
+a maximum size of four instances. automatic scaling. 
+The scaling policies defined adjust the number of 
+instances within the minimum and maximum number of 
+instances, based on the criteria that were specified. 33
+
+
+
+Scaling out versus scaling in
+
+Elastic Load 
+Balancing
+
+Auto Scaling group Auto Scaling group Auto Scaling group
+
+Base configuration Scale out Scale in
+(launch instances) (terminate instances)
+
+34
+
+
+
+AWS Auto Scaling
+
+• AWS Auto Scaling is a separate 
+service from Amazon EC2 Auto 
+Scaling.
+
+• Monitors your applications and 
+automatically adjusts capacity to 
+maintain steady, predictable 
+performance at the lowest 
+possible cost
+
+AWS Auto Scaling
+• Provides a simple, powerful user 
+
+interface that enables you to build 
+scaling plans for resources, 
+including –
+• Amazon EC2 instances and Spot 
+
+If you are already using Fleets
+Amazon EC2 Auto Scaling to • Amazon Elastic Container Service 
+dynamically scale your EC2 (Amazon ECS) Tasks 
+instances, you can now use • Amazon DynamoDB tables and 
+it with AWS Auto Scaling to indexes
+scale additional resources • Amazon Aurora Replicas
+
+for other AWS services.
+35
+
+
+
+How Amazon EC2 Auto Scaling works
+
+What Where When
+VPC Maintain current number
+
+Private subnet • Health checks
+AMI
+
+Auto Scaling group Manual scaling
+EC2 instance • Min, max, desired capacity
+
+Launch Scheduled scaling
+
+configuration Auto Scaling group • Scheduled actions
+
+• AMI • VPC and subnets
+• Instance type • Load balancer Dynamic scaling
+
+• IAM role • Scaling policies
+• Security groups
+• EBS volumes Predictive scaling
+
+• AWS Auto Scaling
+
+36
+
+
+
+Implementing dynamic scaling
+
+Elastic Load Balancing
+
+Auto Scaling group
+
+CPU 
+utilization If average CPU 
+
+utilization is 
+> 60% for 5 
+minutes…
+
+Run Amazon EC2 Auto Scaling policy
+Amazon EC2 Auto Scaling Amazon CloudWatch
+
+Amazon CloudWatch, Amazon EC2 Auto Scaling, and Amazon ELB work well 
+individually. 
+Together can become more powerful and increase the control and flexibility over 
+how your application handles customer demand. 37
+
+
+
+The Architecture Implementing Dynamic Scaling
+
+One common configuration for implementing dynamic scaling is to create a 
+CloudWatch alarm that is based on performance information from your EC2 
+instances or load balancer.
+
+When a performance threshold is breached, a CloudWatch alarm triggers an 
+automatic scaling event that either scales out or scales in EC2 instances in the 
+Auto Scaling group. 
+
+1. Create an Amazon CloudWatch alarm to monitor CPU utilization across the 
+fleet of EC2 instances and run automatic scaling policies if the average CPU 
+utilization across the fleet goes above 60 percent for 5 minutes.
+
+2. Amazon EC2 Auto Scaling instantiates a new EC2 instance into your Auto 
+Scaling group based on the launch configuration that you create. 
+
+3. After the new instance is added, Amazon EC2 Auto Scaling makes a call to 
+Amazon Elastic Load Balancing (ELB) to register the new EC2 instance in 
+that Auto Scaling group. 
+
+4. Amazon ELB then performs the required health checks and starts 
+distributing traffic to that instance. ELB routes traffic between EC2 instances 
+and feeds metrics to Amazon CloudWatch. 
+
+38
+
+
+
+Quiz 2
+Which service would you use to send alerts based on Amazon 
+CloudWatch alarms?
+
+Choice Response
+
+A Amazon Simple Notification Service
+
+B AWS CloudTrail
+
+C AWS Trusted Advisor
+
+D Amazon Route 53
+
+39
+
+
+
+Section 5: Cloud Testing
+Chapter 7: Deployment And Testing On Cloud Platform
+
+
+
+Cloud Testing
+• Cloud Testing refers to the testing of resources such as hardware, software, 
+
+etc. that are available on demand. 
+
+• Even the testing here can be viewed “as a service”. 
+
+• For cloud offerings, it’s essential to make sure that the service (product) 
+not only meets its functional requirements but also the non-functional 
+requirements.
+
+• With a range of applications in the cloud, it is now becoming essential to 
+develop the Cloud Testing strategy – must align to and leverage all 
+aspects of the Cloud. 
+
+41
+
+
+
+Benefits Of Cloud Testing
+
+• Dynamic availability of testing environment: 
+• The normal testing approach in any organization is to invest in the 
+
+hardware/software infrastructure required for testing. 
+• The environment supplied to the testing teams very rarely match a 
+
+customer environment on account of rapidly changing requirements, 
+as a result of which it is very challenging for the companies to keep it 
+up. 
+
+• Cloud is the only answer to this problem whereby, users can easily 
+replicate a customer environment and find defects early in the cycle.
+
+• Low cost: 
+• Another angle to the previous point is that when companies invest in 
+
+the infrastructure, the usual cause of it is many of their servers are not 
+utilized all the time. 
+
+• As a result, they may have to incur additional expenses on license 
+renewal. 
+
+• Transitioning to the cloud helps in this scenario as well, as users can 
+commission appliances as and when they want, thereby saving huge 
+costs for an organization.
+
+42
+
+
+
+Benefits Of Cloud Testing (cont.)
+
+• Easily customizable: 
+• With the use of cloud, it’s an easy task for organizations to emulate an 
+
+end-user centric environment by customizing it as per the usage 
+thereby, saving cost and time. 
+
+• Test teams can easily perform load and performance testing scenarios 
+in various permutations and combinations like – different OSes, 
+browsers, configurations, etc.
+
+• Scalability: 
+• This is one of the most attractive features of the cloud whereby the 
+
+computing resources can be increased or decreased wherever it is 
+necessary. 
+
+• This is widely used in situations where the business requirements keep 
+altering frequently.
+
+43
+
+
+
+Cloud Testing Forms
+
+• Testing of the whole cloud: The cloud is viewed as a whole 
+entity based on its features and testing is carried out based on 
+that.
+
+• Testing within a cloud: This is the testing that is carried out 
+inside the cloud by checking each of its internal features
+
+• Testing across the clouds: Based on the specifications, here the 
+testing is carried out on the different types of clouds-like public, 
+private and hybrid clouds.
+
+• SaaS testing in cloud: Functional and non-functional testing is 
+performed based on requirements.
+
+44
+
+
+
+Cloud Testing Environments
+
+• There are 3 types of Cloud Testing Environments:
+• A private or public environment where the quality of applications 
+
+deployed in them needs to be validated.
+• A hybrid environment, where the quality of applications deployed in 
+
+them needs to be validated.
+• A test environment that is cloud-based, where the quality of 
+
+applications deployed in the cloud needs to be validated.
+
+45
+
+
+
+Types Of Testing Performed In 
+The Cloud
+
+• Testing types includes, 
+Functional Testing & Non-
+functional Testing
+
+• Functional Testing has to be 
+performed to make sure that 
+the offering provides the 
+services that the user is 
+paying for.
+
+• Functional tests ensure that 
+the business requirements are 
+being met.
+
+• Non-functional tests mainly 
+focus on a application based 
+tests ensuring that they meet 
+the desired requirements.
+
+46
+
+
+
+Types Of Testing Performed In 
+The Cloud
+
+• Some of the functional tests:
+• System Verification Testing: This ensures whether the various modules 
+
+function correctly with one another, thus making sure that their 
+behavior is as expected.
+
+• Acceptance Testing: Here the cloud-based solution is handed over to 
+the users to make sure it meets their expectations.
+
+• Interoperability Testing: Any application must have the flexibility to 
+work without any issues not only on different platforms but it must also 
+work seamlessly when moving from cloud infrastructure to another.
+
+47
+
+
+
+Types Of Testing Performed 
+In The Cloud (cont.)
+
+• Non-functional tests include:
+• #1) Availability Testing: The cloud supervisor/vendor has to make sure 
+
+that the cloud is available round the clock. As there could be many 
+mission-critical activities going on, the administrator has to make sure 
+that there is no adverse impact to the consumers
+
+• #2) Multi-Tenancy Testing: Here, multiple users use a cloud offering. 
+Testing must be performed to ensure that there is sufficient security 
+and access control of the data when multiple users are using a single 
+instance.
+
+• #3) Performance Testing: Verification of the response time needs to be 
+done to ensure that everything is intact even when there is a lot of 
+requests to be satisfied. The network latency is also one of the critical 
+factors to evaluate performance.
+
+Also, workload balancing needs to be done when there is a reduction 
+in load, by decommissioning resources. Thus load and stress testing 
+are done in the cloud offering to make sure applications are 
+performing optimally with an increase/decrease in load and stress. 48
+
+
+
+Distributed Denial of Service (DDoS) 
+attacks 
+
+What is DDoS? 
+
+DDoS
+
+DDoS DDoS
+
+© 2020, Amazon Web Services, Inc. or its aff iliates. All rights reserved.
+
+49
+
+
+
+Types Of Testing Performed In The Cloud 
+(cont.)
+
+• #4) Security Testing: As everything is available anytime with Cloud, it’s 
+essential to make sure that all user sensitive information has no 
+unauthorized access and the privacy of users remains intact. When 
+maintaining the applications in the cloud, user data integrity must also 
+be verified.
+
+• #5) Disaster Recovery Testing: As already stated in availability testing, 
+the cloud has to be available at all times and if there are any kind of 
+failures like network outages, breakdown due to extreme load, system 
+failures, etc, measure how fast the failure is indicated and if any data 
+loss occurs during this period.
+
+• #6) Scalability Testing: Test to make sure that offering has the 
+capability to provide scale up or scale down facilities as per the need.
+
+50
+
+
+
+Cloud Testing Tools
+
+• Some of the tools used in different kinds of testing performed in a 
+cloud environment.
+
+• Tools for Performance Testing in the Cloud – Many of the tools are 
+basically used for performance, load, stress testing. Some of these 
+tools below can also be used for functional tests:
+• SOASTA CloudTest
+• LoadStorm
+• CloudTestGo
+• AppPerfect.
+• Jmeter
+• Cloudslueth
+• CloudTestGo
+• AppPerfect
+
+• Cloud Security Testing Tools – security-related tools which are 
+commonly used:
+• Nessus
+• Wireshark
+• Nmap
+
+54
+
+
+
+Cloud Testing Challenges
+
+• There are some challenges with relying on and using the cloud 
+as infrastructure as well. Let’s take a look at some of the primary 
+concerns while using the cloud.
+• Challenge #1) With everything available on-demand to any user, 
+
+security is a primary issue for the businesses as currently there is still a 
+lot of discussion and research going on in the industry to set up 
+security standards. 
+User privacy protection, security standards on the cloud and the 
+security of applications running in the cloud are some of the primary 
+issues that need to be addressed in the cloud infrastructure. Security 
+Testing techniques [1] e.g, password cracking, URL Manipulation 
+Through HTTP GET Methods, SQL Injection, Cross-site Scripting (XSS)
+
+• Challenge #2) Another big challenge is the performance of an 
+application in a cloud, specifically in private clouds. It will be shared 
+across many users and hence could lead to delays as well. Also in case 
+of some maintenance or outage-related activities, the bandwidth may 
+seem to be insufficient. 55
+
+
+
+Cloud Testing Challenges (cont.)
+
+• Challenge #3) Sometimes for testing purposes, it require certain 
+configurations with respect to servers, storage or networking which 
+may not be supported by the cloud provider. This sometimes makes it 
+difficult to emulate customer environments.
+
+• Challenge #4) with respect to integration testing whereby the testers 
+test the network, database, servers, etc. In such situations, the tester 
+will not have control over the underlying environment. 
+Secondly, the challenge is doubled when there has to be an interaction 
+between these components because the tester will have to anticipate 
+risks like crashes, network breakdown or servers going kaput.
+
+56
+
+
+
+Takeaway
+
+• Managed service for ease of deployment and maintenance
+
+• Cloud service such as Amazon CloudWatch enables cloud consumers 
+monitor AWS resources and applications in real time
+
+• Perform scaling and load balancing tasks to improve an architecture
+
+• Scaling enables you to respond quickly to changes in resource needs. 
+Auto Scaling maintains application availability by automatically 
+launches and releases servers in response to workload changes
+
+• Load balancing Indicate how to distribute traffic across cloud instances
+
+• Using the cloud for testing is immensely helping organizations to 
+acquire the required tools, software licenses, infrastructures at a very 
+low cost without having to set it up themselves and later worry about 
+its maximum utilization.
+
+• Nevertheless, there are challenges in cloud testing that should 
+recognised by the organisation 
+
+
+
+External References
+
+• https://www.softwaretestinghelp.com/security-testing-of-web-
+applications/#Methods_For_Web_Security_Testing
+
+58

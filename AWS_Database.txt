@@ -1,0 +1,732 @@
+﻿Module 8: Databases
+AWS Academy Cloud Foundations
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved.
+
+
+
+Module overview
+Topics Lab
+• Amazon Relational Database Service • Lab 5: Build Your DB Server and Interact 
+
+(Amazon RDS) with Your DB Using an App
+• Amazon DynamoDB Activity
+Demos • Database case studies
+• Amazon RDS console
+
+Knowledge check
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 2
+
+
+
+Module objectives
+After completing this module, you should be able to:
+
+• Explain Amazon Relational Database Service (Amazon RDS)
+
+• Identify the functionality in Amazon RDS
+
+• Explain Amazon DynamoDB
+
+• Identify the functionality in Amazon DynamoDB
+
+• Perform tasks in an RDS database, such as launching, configuring, and interacting
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 3
+
+
+
+Section 1: Amazon Relational 
+Database Service
+Module 8: Databases
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved.
+
+
+
+Amazon Relational Database Service
+
+Amazon Relational Database 
+Service (Amazon RDS)
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 5
+
+
+
+Unmanaged versus managed services
+
+Unmanaged: Managed:
+Scaling, fault tolerance, and Scaling, fault tolerance, and 
+availability are managed by availability are typically built 
+
+you. into the service.
+manage how the service 
+responds to:
+(1) changes in load 
+(2) errors
+(3) situations where 
+
+resources become 
+unavailable
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 6
+
+
+
+Challenges of relational databases
+• Server maintenance and energy footprint
+• Software installation and patches
+• Database backups and high availability
+• Limits on scalability
+• Data security
+• Operating system (OS) installation and patches
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 7
+
+
+
+Amazon RDS
+
+Managed service that sets up and operates a relational database in the 
+cloud.
+
+AWS Cloud
+
+Users Application
+Servers Amazon RDS
+
+AWS provides a service that sets up, operates, and scales the relational database without 
+any ongoing administration. 
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 8
+
+
+
+From on-premises databases to Amazon RDS
+Database in Amazon Elastic 
+
+On-premises database Compute Cloud (Amazon EC2) Database in Amazon RDS or 
+Amazon Aurora
+
+Application optimization Application optimization Application optimization
+Scaling Scaling Scaling
+High Availability High Availability High Availability
+Database backups Database backups Database backups
+Database software patches Database software patches Database software patches
+Database software installs Database software installs AWS Database software installs
+Operation system patches Operation system patches provides Operation system patches
+Operating system install Operating system install Operating system install
+Server maintenance Server maintenance Server maintenance
+Rack and stack servers Rack and stack servers Rack and stack servers
+Power, HVAC, network AWS Power, HVAC, network Power, HVAC, network
+
+provides
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 9
+
+
+
+Managed services responsibilities
+You manage: 
+• Application optimization
+
+AWS manages:
+• OS installation and patches
+• Database software installation and patches
+• Database backups
+• High availability
+• Scaling
+• Power and racking and stacking servers Amazon RDS
+• Server maintenance
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 10
+
+
+
+Amazon RDS DB instances
+
+Amazon RDS
+=
+
+MySQL
+DB Instance Class ((Hardware/Performance)
+(e.g. General Purpose (M and T classes), Memory Optimized (R and X Amazon Aurora
+classes), Compute Optimized (C classes - less common for standard RDS) & 
+Storage Optimized (D and I classes - less common for standard RDS))
+
+M • CPU Microsoft SQL Server
+• Memory
+• Network performance PostgreSQL
+
+Amazon RDS DB 
+main instance DB Instance Storage MariaDB
+
+(use EBS volumes)
+• Magnetic
+• General Purpose (solid state drive, or SSD) Oracle
+• Provisioned IOPS
+
+DB engines
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 11
+
+
+
+Amazon RDS in a virtual private cloud (VPC)
+
+AWS Cloud
+Availability Zone
+
+VPC
+Public subnet
+
+Internet 
+Users gateway Amazon EC2
+
+Private subnet
+
+Amazon RDS
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 12
+
+
+
+RDS Deployment
+
+• Primary Instance:
+• This is the active, main database instance that processes all application queries by default. 
+• In a Multi-AZ deployment, it synchronously replicates data to a standby instance for high availability.
+
+• Standby Instance:
+• In a Multi-AZ deployment, this is a synchronously maintained, passive copy of the primary instance in a 
+
+different Availability Zone (AZ). 
+• It is used for automatic failover in case the primary instance fails and is not directly accessible for traffic.
+
+• Read Replica:
+• This is a read-only copy of the primary instance, created to offload read-heavy workloads (like reporting or 
+
+analytics) and improve performance on the primary DB. 
+• Data is asynchronously replicated, and can create up to 15 read replicas across or within AWS regions.
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 13
+
+
+
+High availability with Multi-AZ deployment (1 of 2)
+AWS Cloud
+
+Availability Zone 1 Availability Zone 2
+
+VPC
+Public subnet
+
+Amazon EC2 Application
+
+Private subnet Private subnet
+
+M Synchronous S
+Amazon RDS 
+
+instance RDS Standby
+ instance
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 14
+
+
+
+High availability with Multi-AZ deployment (2 of 2)
+AWS Cloud
+
+Availability Zone 1 Availability Zone 2
+
+VPC
+Public subnet
+
+Amazon EC2 Application
+
+Private subnet Private subnet
+
+M Synchronous S
+Amazon RDS 
+
+instance RDS Standby
+ instance
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 15
+
+
+
+Amazon RDS read replicas
+Features AWS Cloud
+
+• Offers asynchronous replication Availability Zone 
+VPC
+
+• Can be promoted to primary if Public subnet
+
+needed
+Amazon EC2 Application
+
+Functionality Private subnet
+
+• Use for read-heavy database 
+workloads P R
+
+Amazon RDS Read replica 
+• Offload read queries primary instance instance
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 16
+
+
+
+Use cases
+
+ü High throughput
+Web and mobile applications ü Massive storage scalability
+
+ü High availability
+
+ü Low-cost database
+Ecommerce applications ü Data security
+
+ü Fully managed solution
+
+ü Rapidly grow capacity
+Mobile and online games ü Automatic scaling
+
+ü Database monitoring
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 17
+
+
+
+When to Use Amazon RDS
+Use Amazon RDS when your application • Do not use Amazon RDS when your 
+requires: application requires:
+• Complex transactions or complex • Massive read/write rates (for example, 
+
+queries 150,000 write/second)
+
+• A medium to high query or write rate – • Sharding due to high data size or 
+Up to 30,000 IOPS (15,000 reads + throughput demands 
+15,000 writes) • Simple GET or PUT requests and 
+
+queries that a NoSQL database can 
+• No more than a single worker node or handle
+
+shard
+• Relational database management 
+
+• High durability system (RDBMS) customization
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 18
+
+
+
+Amazon RDS: Clock-hour billing and database characteristics 
+Clock-hour billing – 
+
+• Resources incur charges when running
+
+Database characteristics – 
+• Physical capacity of database:
+
+• Engine
+• Size
+• Memory class
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 19
+
+
+
+Amazon RDS: DB purchase type and multiple DB instances
+
+DB purchase type – 
+• On-Demand Instances
+
+• Compute capacity by the hour
+• Reserved Instances
+
+• Low, one-time, upfront payment for database instances that are reserved with a 
+1-year or 3-year term
+
+Number of DB instances – 
+• Provision multiple DB instances to handle peak loads
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 20
+
+
+
+Amazon RDS: Storage
+Provisioned storage – 
+
+• No charge
+• Backup storage of up to 100 percent of database storage for an active database
+
+• Charge (GB/month)
+• Backup storage for terminated DB instances
+
+Additional storage – 
+• Charge (GB/month)
+
+• Backup storage in addition to provisioned storage
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 21
+
+
+
+Amazon RDS: Deployment type and data transfer
+Requests – 
+
+• The number of input and output requests that are made to the database
+
+Deployment type—Storage and I/0 charges vary, depending on whether you 
+deploy to – 
+
+• Single Availability Zone
+• Multiple Availability Zones
+
+Data transfer –
+• No charge for inbound data transfer 
+• Tiered charges for outbound data transfer
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 22
+
+
+
+Recorded demo:
+Amazon RDS 
+
+console 
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 23
+
+
+
+Build Your DB 
+Server and Interact 
+with Your DB Using 
+
+an App
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 24
+
+
+
+Lab 5: Scenario
+This lab is designed to show you how to use an AWS managed database 
+instance to solve a need for a relational database.
+
+AWS Cloud Availability Zone A Availability Zone B
+VPC: 10.0.0.0/16
+
+Public subnet 1: Public subnet 2:
+    10.0.0.0/24     10.0.2.0/24
+
+Internet Security group
+Internet NAT Web
+gateway gateway Server
+
+Private subnet 1: Private subnet 2:
+   10.0.1.0/24    10.0.3.0/24
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 25
+
+
+
+Lab 5: Tasks
+
+Security group
+Create a VPC security group.
+
+Private subnet
+Create a DB subnet group.
+
+Create an Amazon RDS DB instance and interact 
+with your database. 
+
+Amazon RDS
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 26
+
+
+
+Lab 5: Final product
+
+AWS Cloud Availability Zone A Availability Zone B
+VPC: 10.0.0.0/16
+
+Public subnet 1: Public subnet 2:
+    10.0.1.0/24     10.0.2.0/24
+
+Internet NAT Security group
+Internet Web
+gateway gateway Server
+
+Private subnet 1: Private subnet 2:
+   10.0.3.0/24    10.0.4.0/24
+
+Security group Security group
+RDS DB RDS DB
+Primary Secondary
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 27
+
+
+
+~  30 minutes
+
+Begin Lab 5: Build your 
+DB server and interact 
+with your DB using an 
+
+application  
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 28
+
+
+
+Lab debrief: 
+key takeaways
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 29
+
+
+
+Section 1 key • With Amazon RDS, you can set up, operate, and 
+takeaways scale relational databases in the cloud.
+
+• Features – 
+• Managed service
+• Accessible via the console, AWS Command Line Interface (AWS 
+
+CLI), or application programming interface (API) calls
+• Scalable (compute and storage)
+• Automated redundancy and backup are available
+• Supported database engines:
+
+• Amazon Aurora, PostgreSQL, MySQL, MariaDB, Oracle, Microsoft SQL Server
+
+30
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved.
+
+
+
+Section 2: Amazon DynamoDB
+Module 8: Databases
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved.
+
+
+
+Relational versus non-relational databases
+Relational (SQL) Non-Relational
+
+Data Storage Rows and columns Key-value, document, graph
+Schemas Fixed Dynamic
+
+Querying Uses SQL Focuses on collection of 
+documents
+
+Scalability Vertical Horizontal
+
+ISBN Title Author Format {
+ ISBN: 3111111223439,
+ Title: “Withering Depths”,
+
+Example 3111111223439 Withering Jackson, 
+Depths Mateo Paperback  Author: ”Jackson, Mateo”,
+
+ Format: “Paperback”
+3122222223439 Wily Willy Wang, 
+
+Xiulan Ebook }
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 32
+
+
+
+What is Amazon DynamoDB? 
+
+Fast and flexible NoSQL database service for any scale
+
+• NoSQL database tables
+
+• Virtually unlimited storage
+
+• Items can have differing attributes
+
+• Low-latency queries
+• Scalable read/write throughput
+
+Amazon DynamoDB
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 33
+
+
+
+Amazon DynamoDB core components
+• Tables, items, and attributes are the core DynamoDB components
+
+• DynamoDB supports two different kinds of primary keys: Partition key and 
+partition and sort key (composite key)
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 34
+
+
+
+Partitioning
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 35
+
+
+
+Items in a table must have a key
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 36
+
+
+
+Section 2 key Amazon DynamoDB:
+takeaways • Runs exclusively on SSDs.
+
+• Supports document and key-value store models.
+• Replicates your tables automatically across your choice 
+
+of AWS Regions.
+• Works well for mobile, web, gaming, adtech, and 
+
+Internet of Things (IoT) applications.
+• Is accessible via the console, the AWS CLI, and API calls.
+• Provides consistent, single-digit millisecond latency at 
+
+any scale.
+• Has no limits on table size or throughput.
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 37
+
+
+
+Recorded demo:
+Amazon DynamoDB 
+
+console 
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 38
+
+
+
+Amazon DynamoDB demonstration
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 39
+
+
+
+The right tool for the right job
+
+What are my requirements?
+
+Enterprise-class relational database Amazon RDS
+
+Fast and flexible NoSQL database service for any scale Amazon DynamoDB
+
+Operating system access or application features that are Databases on Amazon 
+not supported by AWS database services EC2
+Specific case-driven requirements (machine learning, data AWS purpose-built 
+warehouse, graphs) database services
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 40
+
+
+
+The right tool for the right job
+
+Service Database Type Managed? Typical Use
+
+Amazon RDS Relational (SQL) Yes General OLTP 
+applications
+
+Amazon Aurora Relational (SQL, 
+cloud-native) Yes High-performance 
+
+OLTP
+
+Amazon DynamoDB NoSQL (Key-Value) Fully serverless Massive scale, low 
+latency
+
+Amazon Redshift Data Warehouse 
+(Columnar SQL) Yes Analytics & reporting 
+
+(OLAP)
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 41
+
+
+
+Module wrap-up
+Module 8: Databases
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved.
+
+
+
+Module summary 
+In summary, in this module, you learned how to:
+
+• Explain Amazon Relational Database Service (Amazon RDS)
+
+• Identify the functionality in Amazon RDS
+
+• Explain Amazon DynamoDB
+
+• Identify the functionality in Amazon DynamoDB
+
+• Explain Amazon Redshift
+
+• Explain Amazon Aurora
+
+• Perform tasks in an RDS database, such as launching, configuring, and interacting
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 46
+
+
+
+Complete the knowledge check
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 47
+
+
+
+Additional resources
+• AWS Database page: https://aws.amazon.com/products/databases/
+• Amazon RDS page: https://aws.amazon.com/rds/
+• Overview of Amazon database services: 
+
+https://docs.aws.amazon.com/whitepapers/latest/aws-
+overview/database.html
+
+• Getting started with AWS databases: 
+https://aws.amazon.com/products/databases/learn/
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 48
+
+
+
+Thank you
+
+Corrections, feedback, or other questions? 
+Contact us at https://support.aws.amazon.com/#/contacts/aws-academy.
+All trademarks are the property of their owners.
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 49
+
+
+
+Sample exam question answer
+Which of the following is a fully-managed NoSQL database service?
+
+The correct answer is B.
+The keywords in the question are “NoSQL database service”.
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 51

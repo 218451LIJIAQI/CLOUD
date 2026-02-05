@@ -1,0 +1,346 @@
+﻿Chapter 8: 
+Emerging Issues in Cloud 
+
+Computing 
+
+Semester 1 2025/2026
+
+By 
+
+Assoc. Prof. Ts. Dr. Novia Admodisastro
+
+Software Engineering & Information System Department
+
+FSKTM, UPM
+
+
+
+Topic Outline
+
+• Security and privacy
+
+• Interoperability
+
+• Infrastructure
+
+• Data management
+
+
+
+Cloud Computing Challenges
+
+3
+
+
+
+4
+
+
+
+Emerging Issues & Challenges in Cloud Computing—A Hybrid Approach 931
+
+ 
+Table 3. Classification of issues identified in interviews with practitioners. 
+
+Number of 
+Category Codes 
+
+occurrences 
+
+Security & privacy Security, privacy 6 
+
+Performance, transfer rates, IP address space, limited capability, 
+Infrastructure 6 
+
+fine-tuning hardware 
+
+Data management Data design and management 2 
+
+Interoperability Portability across platforms, lack of standards 10 
+
+Legal Legal issues 4 
+
+Economic Rent vs. buy, access to funding, cost of bandwidth 3 
+
+Service management Service usability, service discovery 2 
+Text
+
+Quality  0 
+
+Software engineering process, instability, design for the cloud, 
+Software 10 
+
+legacy applications 
+
+Trust Trust 1 
+
+Change management Change management, previous investments, perceived loss of jobs 3 
+
+Education about the cloud, learning DevOps, lack of experience in 
+Learning & education the cloud, learning curve, learning APIs, continuous learning, 10 
+
+complexity of operations 
+
+ 
+existing categories. One category from the literature re- pant stated, “there’s a total lack of open APIs that a com- 
+view (namely: quality), highlighted in blue, was not as- pany could conform to.” Another participant asserts that 
+
+5
+signed any codes. even for a single provider, this seems to be a major chal- 
+
+The practitioners we interviewed touched on issues lenge: “There does not seem to be an API architecture 
+related to all the categories identified in the literature re- that Amazon says OK all our APIs should follow the 
+view except for one category on Quality.  same way-they will all work like this. They all work 
+
+On software related issues, participants discussed por- slightly differently and don’t always return the same re- 
+ting legacy applications as a major challenge. As one sults in a consistent way.” Other issues under this cate- 
+participant stated that “you can’t just put some software gory include moving virtual machines among different 
+that’s intended to be run on a desktop and just put it in platforms, and vendor lock-in. 
+the cloud and just automatically it’s easy to distribute.” On security and privacy, participants assert that secu-
+Another participant asserted that “there is a lot of legacy rity and privacy are amongst the key inhibitors to adopt-
+applications that will not scale well in the cloud.” Insta- ing the cloud. From a management perspective, one par-
+bility of important platforms in the Cloud such as Open- ticipant states that “management is very worried about 
+Stack has also been raised as a critical issue. One par- the security of the cloud.” Nonetheless, one of the par-
+ticipant stated that “Sometimes [OpenStack] is just com- ticipants argued that although “privacy and security are 
+pletely unstable and there’s bugs in it that would just stop big issues…, the cloud is safer. You have teams of peo-
+everything.” Another participant described the platform ple dedicated to security at these big cloud providers and 
+as “a moving target.” He continued: “Everything is mov- they have to conform to all sorts of regulations.” Partici-
+ing. It’s not stable.” The software engineering process pants also expressed their concerns about the privacy of 
+itself is being challenged by new roles such as DevOps any data stored abroad mainly due to legislation issues.  
+(aka. development and operations): “We definitely iden- On infrastructure, participants raised a range of issues. 
+tify as DevOps and with the stuff that we’re doing in For example, as one participant noted, performance is 
+particular, seems to be a bit more ops heavy and that major issue in the cloud: “there are notable issues with 
+doesn’t lend itself as well to Agile.” Other issues that shared I/O that are still kind of being worked out where a 
+were raised include: integration problems, development physical server is still faster.” Another participant stated: 
+versus deployment environments, and dealing with ex- “In a lot of cases it still makes far more sense to grab a 
+ternal and virtual resources. stack of disks, tons of terabyte disks, and throw them into 
+
+On interoperability, participants brought up the issue your trunk and drive to your destination, than it would to 
+of the lack of standards and open APIs. As one partici- actually send it over the wire.” 
+
+Copyright © 2012 SciRes.                                                                                 JSEA 
+
+
+
+1. Security and privacy
+
+• Privacy and data security are the two most concerning factors 
+to cloud computing models. 
+• Cloud storage of user or business data is vital and private. 
+• Encryption, security hardware, and software can solve security and 
+
+privacy problems.
+
+• Identity theft, data breaches, malware infections, and other 
+security issues on the cloud lead to a decline in user confidence 
+in your applications. 
+• This can lead to a heavy loss in revenue alongside stature and 
+
+reputation. 
+• In addition, dealing with cloud computing for small businesses needs 
+
+sending and receiving a massive amount of data quickly and is 
+vulnerable to data leaks.
+
+6
+
+
+
+Cloud Security Approaches
+
+• Encryption (symmetric, asymmetric, hashing) & 
+tokenization/obfuscation
+
+• Cloud security alliance (cloudsecurityalliance.org)
+• Best practices to ensure a secure cloud computing environment
+
+• Mainstream Cloud security offerings: security assessment, 
+secure cloud architecture design etc.
+
+• Cloud security in mainstream vendor solutions 
+
+• Standards, cloud security models and related patterns 
+
+7
+
+
+
+Security Assurance Programs
+
+Assurance programs
+
+© 2020, Amazon Web Services, Inc. or its af f iliates. All rights reserved.
+
+9
+
+
+
+2. Portability and interoperability
+
+• Operational roadblock.
+• When organizations scale or expand their intangible IT ecosystems, one 
+
+of the biggest problems with cloud computing from a logistical 
+standpoint is moving from one provider or platform to another.
+
+• Typically, when a business switches to a new platform, there is a 
+lockdown period that puts a kink in the network, driving down 
+productivity in the process. 
+
+• This significant lack of flexibility results in a raft of issues with:
+• Safe and fluent data migration and management
+• Establishing secure and compliant networks, essentially from scratch
+• Restricted user or customer access
+
+10
+
+
+
+Portability and interoperability (cont.)
+
+• These glaring roadblocks have become more prevalent in 
+recent years due to the increasing complexity of 
+• tools
+• platforms
+• systems
+
+• One of the most effective ways to counteract these tricky risks 
+of cloud computing is 
+• to go through relevant data and service laws in related region to 
+
+understand application portability rights 
+• working out concrete terms with potential cloud providers to prevent 
+
+lockdown periods or service restrictions in advance.
+
+11
+
+
+
+Infrastructure (interoperability)
+
+• Most research on issues and challenges with cloud computing 
+recognize interoperability as a major adoption barrier because 
+of the risk of a vendor lock-in.
+
+• Amongst the many problems being discussed are:
+• lack of standard interfaces and open APIs, 
+• and the lack of open standards for VM formats and 
+• service deployment interfaces 
+
+• These issues result in integration difficulties between services 
+obtained from different cloud providers as well as between 
+cloud resources and internal legacy systems. 
+
+12
+
+
+
+3. Compliance & Legal Issues
+• One of the risks of cloud computing is facing today is 
+
+compliance. 
+
+• That is an issue for anyone using backup services or storage. 
+Every time a company moves data from the internal storage to 
+a cloud, it is faced with being compliant with official regulations 
+and laws. 
+
+• For example, 
+• Healthcare organizations in the USA have to comply with HIPAA 
+
+(Health Insurance Portability and Accountability Act of 1996),
+• Public retail companies have to comply with SOX (Sarbanes-Oxley Act 
+
+of 2002) 
+• PCI DSS (Payment Card Industry Data Security Standard).
+• Personal Data Protection Act 2010 (PDPA), was passed by the 
+
+Malaysian Parliament on June 2, 2010 and came into force on 
+November 15, 2013. 
+• Collection & Processing, Transfer, Security, Breach Notification, Electronic Market, 
+
+Online Privacy
+
+• Depending on the sector and requirements, every organization 14
+
+must ensure these standards are respected and carried out.
+
+
+
+15
+
+
+
+Compliance & Legal Issues (cont.)
+
+• Laws and regulations vary widely across different regions and 
+jurisdictions as to where and how data should be stored, 
+processed, and used.
+
+• For example, the European Union requires that all personal data 
+be physically stored within the jurisdictions of the European 
+Union. Also, compliance requirements might vary in regards to 
+the disclosure of data in general and sensitive data in specific 
+(e.g. financial data, health insurance records), in addition to 
+variations in the regulations around transaction log- ging and 
+taxation.
+
+• Traceability of data and alterations made on it has also been 
+reported as a legal concern. 
+
+17
+
+
+
+4. Managing multiple clouds
+
+• Challenges facing cloud computing haven’t just been 
+concentrated in one, single cloud.
+
+• The state of multi-cloud has grown exponentially in recent 
+years.
+• Companies are shifting or combining public and private 
+
+clouds and, as mentioned earlier, tech giants like Alibaba and 
+Amazon are leading the way.
+
+• The survey by Flexera shows that 89% of enterprises have a 
+multi-cloud strategy. 
+• Enterprises with a hybrid strategy (combining public and 
+
+private clouds) reach 80%, 
+• Organizations with a strategy of multiple public clouds or 
+
+multiple private clouds grew slightly but stay under 10%.
+
+18
+
+
+
+19
+
+
+
+External References
+
+• https://www.datapine.com/blog/cloud-computing-risks-and-
+challenges/
+
+• Ghanam, Y., Ferreira, J., & Maurer, F. (2012). Emerging issues 
+& challenges in cloud computing—a hybrid approach.
+
+• https://vilmate.com/blog/data-management-in-cloud-
+computing-best-practices-challenges-trends/
+
+• https://cloudsecurityalliance.org/
+
+• https://www.sealpath.com/blog/types-of-encryption-
+guide/#:~:text=There%20are%20different%20types%20of,%2C
+%20Asymmetric%20Encryption%2C%20and%20Hashing
+
+20
+
+
+
+21

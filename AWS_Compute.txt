@@ -1,0 +1,1678 @@
+﻿Module 6: Compute
+AWS Academy Cloud Foundations
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved.
+
+
+
+Module overview
+Topics Activities
+• Compute services overview • Amazon EC2 versus Managed Service
+• Amazon EC2 • Hands-on with AWS Lambda
+
+• Amazon EC2 cost optimization • Hands-on with AWS Elastic Beanstalk
+
+• Container services Demo
+• Introduction to AWS Lambda
+
+• Recorded demonstration of Amazon EC2
+• Introduction to AWS Elastic Beanstalk
+
+Lab
+• Introduction to Amazon EC2
+
+Knowledge check
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 2
+
+
+
+Module objectives
+After completing this module, you should be able to:
+• Provide an overview of different AWS compute services in the cloud
+• Demonstrate why to use Amazon Elastic Compute Cloud (Amazon EC2)
+• Identify the functionality in the EC2 console
+• Perform basic functions in Amazon EC2 to build a virtual computing environment
+• Identify Amazon EC2 cost optimization elements
+• Demonstrate when to use AWS Elastic Beanstalk
+• Demonstrate when to use AWS Lambda
+• Identify how to run containerized applications in a cluster of managed servers
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 3
+
+
+
+Section 1: Compute services 
+overview
+Module 6: Compute
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved.
+
+
+
+AWS compute services
+
+Amazon Web Services (AWS) offers many compute services. This module will discuss the highlighted services.
+
+Amazon EC2 Amazon EC2  Amazon Elastic  Amazon Elastic  VMware Cloud 
+Auto Scaling Container Registry  Container Service  on AWS
+
+(Amazon ECR) (Amazon ECS)
+
+AWS Elastic  AWS Lambda Amazon Elastic  Amazon Lightsail AWS Batch
+Beanstalk Kubernetes Service 
+
+(Amazon EKS)
+
+AWS Fargate AWS Outposts AWS Serverless 
+Application Repository
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 5
+
+
+
+Categorizing compute services
+Services Key Concepts Characteristics Ease of Use
+• Amazon EC2 • Infrastructure as a service  • Provision virtual machines that  A familiar concept to many IT 
+
+(IaaS) you can manage as you choose professionals.
+• Instance-based
+• Virtual machines
+
+• AWS Lambda • Serverless computing • Write and deploy code that runs  A relatively new concept for 
+• Function-based  on a schedule or that can be  many IT staff members, but 
+• Low-cost triggered by events easy to use after you learn 
+
+• Use when possible (architect for  how.
+the cloud)
+
+• Amazon ECS  • Container-based computing • Spin up and run jobs more  AWS Fargate reduces 
+• Amazon EKS  • Instance-based quickly administrative overhead, but 
+• AWS Fargate  you can use options that give 
+• Amazon ECR you more control.
+• AWS Elastic  • Platform as a service (PaaS) • Focus on your code (building  Fast and easy to get started.
+
+Beanstalk • For web applications your application)
+• Can easily tie into other services
+
+—databases, Domain Name 
+System (DNS), etc.
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 6
+
+
+
+Choosing the optimal compute service
+• The optimal compute service or services that you use will depend on 
+
+your use case
+• Some aspects to consider – 
+
+• What is your application design?
+• What are your usage patterns?
+• Which configuration settings will you want to manage?
+
+• Selecting the wrong compute solution for an architecture can lead to 
+lower performance efficiency
+• A good starting place—Understand the available compute options
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 7
+
+
+
+Section 2: Amazon EC2
+Module 6: Compute
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved.
+
+
+
+Amazon Elastic Compute Cloud (Amazon EC2)
+Example uses of 
+
+Amazon EC2 
+instances
+
+ Application server
+ Web server
+ Database server
+ Game server
+ Mail server
+ Media server
+ Catalog server
+
+Photo by Taylor Vick on Unsplash  File server
+ Computing server
+ Proxy server
+
+Photo by panumas nikhomkhai from Pexels
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 9
+
+
+
+Amazon EC2 overview
+• Amazon Elastic Compute Cloud (Amazon EC2)  
+
+• Provides virtual machines—referred to as EC2 instances
+—in the cloud.
+
+• Gives you full control over the guest operating system 
+(Windows or Linux) on each instance.
+
+• You can launch instances of any size into an 
+Availability Zone anywhere in the world.
+
+Amazon • Launch instances from Amazon Machine Images (AMIs).
+EC2 • Launch instances with a few clicks or a line of code, and 
+
+they are ready in minutes.
+• You can control traffic to and from instances.
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 10
+
+
+
+Launching an Amazon EC2 instance
+
+This section of the module walks 
+through nine key decisions to 
+make when you create an EC2 
+instance by using the AWS 
+Management Console Launch 
+Instance Wizard. 
+
+Along the way, essential 
+Amazon EC2 concepts will be 
+explored.
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 11
+
+
+
+1. Select an AMI
+
+Choices made using the Launch
+Launch Instance Wizard: instance
+
+AMI Instance
+
+1. AMI
+2. Instance Type • Amazon Machine Image (AMI)
+3. Network settings • Is a template that is used to create an EC2 instance (which is a virtual 
+4. IAM role machine, or VM, that runs in the AWS Cloud)
+5. User data • Contains a Windows or Linux operating system
+6. Storage options • Often also has some software pre-installed
+7. Tags
+8. Security group • AMI choices:
+9. Key pair • Quick Start – Linux and Windows AMIs that are provided by AWS
+
+• My AMIs – Any AMIs that you created
+• AWS Marketplace – Pre-configured templates from third parties
+• Community AMIs – AMIs shared by others; use at your own risk
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 12
+
+
+
+Creating a new AMI: Example
+AWS Cloud
+
+AMI details
+Region A Connect to the instance 
+
+and manually modify it or 
+Quick  run a script that modifies 
+Start or the instance (for example, 
+
+Capture as 
+other Launch an upgrade installed 
+
+existing Starter instance software) a new AMI
+AMI AMI 1 2 3
+
+Unmodified Modified New 
+Instance Instance AMI
+
+(Optional) Import MyAMI
+a virtual machine
+
+Region B Copy the AMI to any other Regions 
+where you want to use it
+
+New 4
+AMI
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 13
+
+
+
+2. Select an instance type
+• Consider your use case
+
+Choices made using the • How will the EC2 instance you create be used?
+Launch Instance Wizard: • The instance type that you choose determines – 
+1. AMI • Memory (RAM)
+2. Instance Type • Processing power (CPU)
+3. Network settings • Disk space and disk type (Storage)
+4. IAM role • Network performance
+5. User data
+6. Storage options • Instance type categories – 
+7. Tags • General purpose
+8. Security group • Compute optimized
+9. Key pair • Memory optimized
+
+• Storage optimized
+• Accelerated computing
+
+• Instance types offer family, generation, and size
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 14
+
+
+
+EC2 instance type naming and sizes 
+
+Example instance sizes
+Instance type naming Instance 
+
+Name vCPU Memory (GB)  Storage
+
+• Example: t3.large t3.nano 2 0.5 EBS-Only
+
+• T is the family name t3.micro 2 1 EBS-Only
+
+• 3 is the generation number t3.small 2 2 EBS-Only
+
+• Large is the size
+t3.medium 2 4 EBS-Only
+
+t3.large 2 8 EBS-Only
+
+t3.xlarge 4 16 EBS-Only
+
+t3.2xlarge 8 32 EBS-Only
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 15
+
+
+
+Select instance type: Based on use case
+
+General Compute Memory Accelerated Storage 
+Purpose Optimized Optimized Computing Optimized
+
+Instance a1, m4, m5,
+Type t2, t3 c4, c5 r4, r5, f1, g3, g4, 
+
+s x1, z1 p2, p3 d2, h1, i3
+
+Use Case Broad High In-memory Machine Distributed file 
+performance databases learning systems
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 16
+
+
+
+Instance types: Networking features
+• The network bandwidth (Gbps) varies by instance type.
+
+• See Amazon EC2 Instance Types to compare.
+• To maximize networking and bandwidth performance of your instance type:
+
+• If you have interdependent instances, launch them into a cluster placement group.
+• Enable enhanced networking. 
+
+• Enhanced networking types are supported on most instance types.
+• See the Networking and Storage Features documentation for details.
+
+• Enhanced networking types – 
+• Elastic Network Adapter (ENA): Supports network speeds of up to 100 Gbps.
+• Intel 82599 Virtual Function interface: Supports network speeds of up to 10 Gbps.
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 17
+
+
+
+3. Specify network settings
+• Where should the instance be deployed? 
+
+Choices made by using the • Identify the VPC and optionally the subnet
+Launch Instance Wizard:
+
+• Should a public IP address be automatically assigned?
+1. AMI • To make it internet-accessible
+2. Instance Type
+3. Network settings
+
+AWS Cloud
+4. IAM role
+5. User data Region
+
+6. Storage options Availability Zone 1 Availability Zone 2
+
+7. Tags VPC
+
+8. Security group Example: specify Public subnet
+
+9. Key pair to deploy the 
+instance here Instance
+
+Private subnet
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 18
+
+
+
+4. Attach IAM role (optional)
+• Will software on the EC2 instance need to interact with other 
+
+Choices made by using the AWS services?
+Launch Instance Wizard: • If yes, attach an appropriate IAM Role.
+1. AMI • An AWS Identity and Access Management (IAM) role that is 
+2. Instance Type attached to an EC2 instance is kept in an instance profile.
+3. Network settings • You are not restricted to attaching a role only at instance launch.
+4. IAM role
+5. User data • You can also attach a role to an instance that already exists.
+6. Storage options
+7. Tags
+8. Security group Example: Application on 
+9. Key pair attached to instance can 
+
+access
+Role that grants Amazon 
+Simple Storage Service  Instance S3 bucket 
+
+(Amazon S3) bucket  with objects
+access permissions
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 19
+
+
+
+5. User data script (optional)
+
+Choices made by using the User data
+Launch Instance Wizard:
+
+#!/bin/bash
+1. AMI yum update –y
+2. Instance Type yum install -y wget
+3. Network settings AMI Running 
+4. IAM role EC2 instance
+5. User data • Optionally specify a user data script at instance launch 
+6. Storage options
+7. Tags • Use user data scripts to customize the runtime environment of 
+8. Security group your instance
+9. Key pair • Script runs the first time the instance starts
+
+• Can be used strategically
+• For example, reduce the number of custom AMIs that you build and 
+
+maintain
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 20
+
+
+
+6. Specify storage
+• Configure the root volume
+
+Choices made by using the
+Launch Instance Wizard: •  Where the guest operating system is installed
+
+1. AMI • Attach additional storage volumes (optional)
+2. Instance Type • AMI might already include more than one volume
+3. Network settings
+4. IAM role • For each volume, specify:
+5. User data • The size of the disk (in GB)
+6. Storage options
+7. Tags • The volume type
+8. Security group • Different types of solid state drives (SSDs) and hard 
+9. Key pair disk drives (HDDs) are available
+
+• If the volume will be deleted when the instance is 
+terminated
+
+• If encryption should be used
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 21
+
+
+
+Amazon EC2 storage options
+• Amazon Elastic Block Store (Amazon EBS) – 
+
+• Durable, block-level storage volumes.
+• You can stop the instance and start it again, and the data will still be there.
+
+• Amazon EC2 Instance Store – 
+• Ephemeral storage is provided on disks that are attached to the host computer where the EC2 
+
+instance is running.
+• If the instance stops, data stored here is deleted.
+
+• Other options for storage (not for the root volume) – 
+• Mount an Amazon Elastic File System (Amazon EFS) file system.
+• Connect to Amazon Simple Storage Service (Amazon S3). 
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 22
+
+
+
+Example storage options
+• Instance 1 characteristics – 
+
+• It has an Amazon EBS root Amazon Elastic Block  Host computer
+
+volume type for the operating  Store (Amazon EBS)
+
+system. Instance Store
+
+• What will happen if the instance is  Attached as Attached as 
+stopped and then started again? Root volume Storage volume
+
+20-GB volume Instance 1 Ephemeral
+volume 1
+
+Attached as 
+• Instance 2 characteristics –  Storage volume
+
+Attached as 
+• It has an Instance Store root 500-GB volume Root volume
+
+volume type for the operating  Instance 2 Ephemeral 
+system. volume 2
+
+• What will happen if the instance 
+stops (because of user error or a 
+system malfunction)?
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 23
+
+
+
+7. Add tags
+• A tag is a label that you can assign to an AWS resource. 
+
+Choices made by using the
+Launch Instance Wizard: • Consists of a key and an optional value.
+
+• Tagging is how you can attach metadata to an EC2 
+1. AMI
+2. Instance Type instance. 
+3. Network settings • Potential benefits of tagging—Filtering, automation, cost 
+4. IAM role
+5. User data allocation, and access control.
+6. Storage options
+7. Tags
+8. Security group Example: 
+9. Key pair
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 24
+
+
+
+8. Security group settings
+• A security group is a set of firewall rules that control 
+
+Choices made by using the traffic to the instance. 
+Launch Instance Wizard: • It exists outside of the instance's guest OS.
+1. AMI • Create rules that specify the source and which ports 
+2. Instance Type that network communications can use.
+3. Network settings
+4. IAM role • Specify the port number and the protocol, such as 
+5. User data Transmission Control Protocol (TCP), User Datagram Protocol 
+6. Storage options (UDP), or Internet Control Message Protocol (ICMP).
+7. Tags
+8. Security group • Specify the source (for example, an IP address or another 
+9. Key pair security group) that is allowed to use the rule.
+
+Example rule:
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 25
+
+
+
+9. Identify or create the key pair
+• At instance launch, you specify an existing key 
+
+Choices made by using the pair or create a new key pair.
+Launch Instance Wizard:
+
+• A key pair consists of – 
+1. AMI mykey.pem
+2. Instance Type • A public key that AWS stores.
+3. Network settings • A private key file that you store. 
+4. IAM role
+5. User data • It enables secure connections to the instance. 
+6. Storage options • For Windows AMIs – 
+7. Tags
+8. Security group • Use the private key to obtain the administrator 
+9. Key pair password that you need to log in to your instance. 
+
+• For Linux AMIs – 
+• Use the private key to use SSH to securely connect 
+
+to your instance.
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 26
+
+
+
+Amazon EC2 console view of a running EC2 instance
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 27
+
+
+
+Another option: Launch an EC2 instance with the AWS Command 
+Line Interface 
+• EC2 instances can also be created 
+
+programmatically.
+AWS Command Line 
+Interface (AWS CLI)
+
+• This example shows how simple the 
+command can be. Example command:
+
+aws ec2 run-instances \ 
+• This command assumes that the key pair and  --image-id ami-1a2b3c4d \ 
+
+security group already exist. --count 1 \ 
+--instance-type c3.large \ 
+
+• More options could be specified. See the AWS  --key-name MyKeyPair \ 
+CLI Command Reference for details. --security-groups MySecurityGroup \
+
+--region us-east-1
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 28
+
+
+
+Amazon EC2 instance lifecycle
+
+Only instances backed by Amazon EBS
+
+Launch pending Start
+
+AMI
+Reboot Stop
+
+rebooting running Stop- stopping stopped
+Hibernate
+
+Terminate
+shutting-
+
+down
+
+Terminate
+terminated
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 29
+
+
+
+Consider using an Elastic IP address
+• Rebooting an instance will not  • If you require a persistent public IP 
+
+change any IP addresses or DNS  address – 
+hostnames. • Associate an Elastic IP address with the 
+
+instance.
+
+• When an instance is stopped and 
+then started again –  • Elastic IP address characteristics – 
+• The public IPv4 address and external DNS  • Can be associated with instances in the 
+
+hostname will change. Region as needed.
+
+• The private IPv4 address and internal DNS  • Remains allocated to your account until you 
+hostname do not change. choose to release it.
+
+Elastic IP 
+Address
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 31
+
+
+
+EC2 instance metadata
+• Instance metadata is data about your instance.
+• While you are connected to the instance, you can view it – 
+
+• In a browser: http://169.254.169.254/latest/meta-data/
+• In a terminal window: curl http://169.254.169.254/latest/meta-data/
+
+• Example retrievable values – 
+• Public IP address, private IP address, public hostname, instance ID, security groups, Region, 
+
+Availability Zone.
+• Any user data specified at instance launch can also be accessed at: 
+
+http://169.254.169.254/latest/user-data/
+• It can be used to configure or manage a running instance.
+
+• For example, author a configuration script that reads the metadata and uses it to configure 
+applications or OS settings.
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 32
+
+
+
+Amazon CloudWatch for monitoring
+• Use Amazon CloudWatch to monitor EC2 
+
+instances
+• Provides near-real-time metrics Amazon CloudWatch Instance with CloudWatch
+
+• Provides charts in the Amazon EC2 console Monitoring 
+tab that you can view
+
+• Maintains 15 months of historical data
+
+• Basic monitoring
+• Default, no additional cost
+• Metric data sent to CloudWatch every 5 minutes
+
+• Detailed monitoring
+• Fixed monthly rate for seven pre-selected metrics 
+• Metric data delivered every 1 minute
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 33
+
+
+
+Section 2 key • Amazon EC2 enables you to run Windows and Linux virtual 
+machines in the cloud.
+
+takeaways • You launch EC2 instances from an AMI template into a VPC 
+in your account.
+
+• You can choose from many instance types. Each instance 
+type offers different combinations of CPU, RAM, storage, and 
+networking capabilities.
+
+• You can configure security groups to control access to 
+instances (specify allowed ports and source).
+
+• User data enables you to specify a script to run the first time 
+that an instance launches. 
+
+• Only instances that are backed by Amazon EBS can be 
+stopped. 
+
+• You can use Amazon CloudWatch to capture and review 
+metrics on EC2 instances.
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 34
+
+
+
+Recorded Amazon 
+EC2 demonstration
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 35
+
+
+
+Lab 3: 
+Introduction to 
+
+Amazon EC2
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 36
+
+
+
+Lab 3 scenario
+In this lab, you will launch and configure your first virtual machine that 
+runs on Amazon EC2. 
+
+AWS Cloud
+Region
+
+Availability Zone 1
+Lab VPC
+
+Public subnet
+
+Web server
+instance
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 37
+
+
+
+Lab 3: Tasks
+• Task 1 – Launch Your Amazon EC2 Instance
+
+• Task 2 – Monitor Your Instance
+
+• Task 3 – Update Your Security Group and Access the Web Server
+
+• Task 4 – Resize Your Instance: Instance Type and EBS Volume
+
+• Task 5 – Explore EC2 Limits
+
+• Task 6 – Test Termination Protection
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 38
+
+
+
+Lab 3: Final product
+By the end of the lab, you will have: Amazon EC2
+1. Launched an instance that is configured as 
+
+a web server
+2. Viewed the instance system log VPC
+
+AMI
+3. Reconfigured a security group Security 
+
+group
+4. Modified the instance type and root volume 
+
+size t2.micro t2.small 
+instance instance
+
+Amazon Elastic 
+Block Store 
+(Amazon EBS)
+
+8-GB root  10-GB root 
+volume volume
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 39
+
+
+
+~ 35 minutes
+
+Begin Lab 3: Introduction 
+to Amazon EC2
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 40
+
+
+
+Lab debrief: 
+Key takeaways
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 41
+
+
+
+Activity: Amazon EC2
+
+Photo by Pixabay from Pexels.
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 42
+
+
+
+Activity: Gather information
+
+Amazon EC2 Amazon RDS
+
+AWS Cloud
+Availability Zone 1 Availability Zone 2
+MS SQL Server MS SQL Server secondary 
+primary DB instance DB instance
+
+Always-on 
+mirroring
+
+Volume Volume Volume Volume 
+replica replica
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 43
+
+
+
+Activity: Check your understanding
+1. Between Amazon EC2 or Amazon RDS, which provides a managed service? What does managed service 
+
+mean?
+• ANSWER: Amazon RDS provides a managed service. Amazon RDS handles provisioning, installation and 
+
+patching, automated backups, restoring snapshots from points in time, high availability, and monitoring.
+2. Name at least one advantage of deploying Microsoft SQL Server on Amazon EC2 instead of Amazon RDS.
+
+• ANSWER: Amazon EC2 offers complete control over every configuration, the OS, and the software stack.
+3. What advantage does the Quick Start provide over a manual installation on Amazon EC2?
+
+• ANSWER: The Quick Start is a reference architecture with proven best practices built into the design.
+4. Which deployment option offers the best approach for all use cases?
+
+• ANSWER: Neither. The correct deployment option depends on your specific needs.
+5. Which approach costs more: using Amazon EC2 or using Amazon RDS?
+
+• ANSWER: It depends. Managing the database deployment on Amazon EC2 requires more customer oversight 
+and time. If time is your priority, then Amazon RDS might be less expensive. If you have in-house expertise, 
+Amazon EC2 might be more cost-effective.
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 44
+
+
+
+Complete the knowledge check
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 87
+
+
+
+Module wrap-up
+Module 6: Compute
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved.
+
+
+
+Module summary 
+In summary, in this module, you learned how to:
+• Provide an overview of different AWS compute services in the cloud
+• Demonstrate why to use Amazon Elastic Compute Cloud (Amazon EC2)
+• Identify the functionality in the Amazon EC2 console
+• Perform basic functions in Amazon EC2 to build a virtual computing environment
+• Identify Amazon EC2 cost optimization elements
+• Demonstrate when to use AWS Elastic Beanstalk
+• Demonstrate when to use AWS Lambda
+• Identify how to run containerized applications in a cluster of managed servers
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 86
+
+
+
+Additional resources
+• Amazon EC2 Documentation: https://docs.aws.amazon.com/ec2/
+• Amazon EC2 Pricing: https://aws.amazon.com/ec2/pricing/
+• Amazon ECS Workshop: https://ecsworkshop.com/
+• Running Containers on AWS: https://containersonaws.com/
+• Amazon EKS Workshop: https://www.eksworkshop.com/
+• AWS Lambda Documentation: https://docs.aws.amazon.com/lambda/
+• AWS Elastic Beanstalk Documentation: https://docs.aws.amazon.com/elastic-
+
+beanstalk/
+• Cost Optimization Playbook: 
+
+https://d1.awsstatic.com/pricing/AWS_CO_Playbook_Final.pdf
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 90
+
+
+
+Thank you
+
+Corrections, feedback, or other questions? 
+Contact us at https://support.aws.amazon.com/#/contacts/aws-academy.
+All trademarks are the property of their owners.
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 91
+
+
+
+Section 3: Amazon EC2 cost 
+optimization
+Module 6: Compute
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved.
+
+
+
+Amazon EC2 pricing models
+On-Demand Instances Reserved Instances Spot Instances
+• Pay by the hour  • Full, partial, or no upfront payment  • Instances run as long as they are 
+
+• for instance you reserve. available and your bid is above the 
+No long-term commitments. Spot Instance price.
+
+• • Discount on hourly charge for that 
+Eligible for the AWS Free Tier. instance. • They can be interrupted by AWS with 
+
+a 2-minute notification.
+• 1-year or 3-year term.
+
+Dedicated Hosts • Interruption options include 
+Scheduled Reserved terminated, stopped or hibernated.
+
+• A physical server with EC2 instance 
+capacity fully dedicated to your use. Instances • Prices can be significantly less 
+
+expensive compared to On-Demand 
+• Purchase a capacity reservation  Instances
+
+Dedicated Instances that is always available on a  • Good choice when you have 
+recurring schedule you specify. flexibility in when your applications 
+
+• Instances that run in a VPC on  • 1-year term. can run.
+hardware that is dedicated to a single 
+customer.
+
+Per second billing available for On-Demand Instances, Reserved Instances, and 
+Spot Instances that run Amazon Linux or Ubuntu.
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 46
+
+
+
+Amazon EC2 pricing models: Benefits
+
+On-Demand Instances Spot Instances Reserved Instances Dedicated Hosts
+• Low cost and flexibility • Large scale, dynamic  • Predictability ensures  • Save money on licensing 
+
+workload compute capacity is  costs
+available when needed • Help meet compliance 
+
+and regulatory 
+requirements
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 47
+
+
+
+Amazon EC2 pricing models: Use cases
+
+Spiky Workloads Time-Insensitive  Steady-State Workloads Highly Sensitive 
+Workloads Workloads
+
+On-Demand Instances Spot Instances Reserved Instances Dedicated Hosts
+• Short-term, spiky, or • Applications with flexible start • Steady state or predictable • Bring your own license (BYOL) 
+
+unpredictable workloads and end times usage workloads
+• Compliance and regulatory 
+
+• Application development or • Applications only feasible at • Applications that require restrictions
+testing very low compute prices reserved capacity, including 
+
+• Users with urgent computing disaster recovery • Usage and licensing tracking
+needs for large amounts of • Users able to make upfront • Control instance placement 
+additional capacity payments to reduce total 
+
+computing costs even further
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 48
+
+
+
+The four pillars of cost optimization 
+
+Cost Optimization
+
+Right size Increase Optimal Optimize 
+elasticity pricing storage 
+
+model choices
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 49
+
+
+
+Pillar 1: Right size
+
+Provision instances to match the need 
+Pillars: • CPU, memory, storage, and network throughput
+
+1. Right size • Select appropriate instance types for your use
+2. Increase elasticity
+
+3. Optimal pricing model
+4. Optimize storage choices Use Amazon CloudWatch metrics
+
+• How idle are instances? When?
+• Downsize instances
+
+Best practice: Right size, then reserve
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 50
+
+
+
+Pillar 2: Increase elasticity
+Stop or hibernate Amazon EBS-backed 
+
+instances that are not actively in use
+Pillars: • Example: non-production development or test instances
+
+1. Right-Size
+2. Increase Elasticity Use automatic scaling to match needs based 
+
+3. Optimal pricing model on usage 
+4. Optimize storage choices • Automated and time-based elasticity
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 51
+
+
+
+Pillar 3: Optimal pricing model
+Leverage the right pricing model for your use case
+
+Pillars: • Consider your usage patterns 
+1. Right-Size
+
+2. Increase Elasticity Optimize and combine purchase types
+3. Optimal pricing model
+
+4. Optimize storage choices Examples:
+• Use On-Demand Instance and Spot Instances for variable 
+
+workloads
+
+• Use Reserved Instances for predictable workloads
+
+Consider serverless solutions (AWS Lambda)
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 52
+
+
+
+Pillar 4: Optimize storage choices
+Reduce costs while maintaining storage performance and 
+
+availability
+Pillars:
+
+Resize EBS volumes
+1. Right-Size
+
+2. Increase Elasticity
+3. Optimal pricing model Change EBS volume types
+
+4. Optimize storage choices  Can you meet performance requirements with less expensive storage?
+ Example: Amazon EBS Throughput Optimized HDD (st1) storage typically 
+
+costs half as much as the default General Purpose SSD (gp2) storage option.
+
+Delete EBS snapshots that are no longer needed
+
+ Identify the most appropriate destination for specific types of data
+ Does the application need the instance to reside on Amazon EBS?
+ Amazon S3 storage options with lifecycle policies can reduce costs
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 53
+
+
+
+Measure, monitor, and improve
+• Cost optimization is an ongoing process.
+
+• Recommendations – 
+• Define and enforce cost allocation tagging.
+
+• Define metrics, set targets, and review regularly.
+
+• Encourage teams to architect for cost.
+
+• Assign the responsibility of optimization to an individual or to a 
+team.
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 54
+
+
+
+Section 3 key • Amazon EC2 pricing models include On-Demand 
+Instances, Reserved Instances, Spot Instances, Dedicated 
+
+takeaways Instances, and Dedicated Hosts.
+
+• Spot Instances can be interrupted with a 2-minute 
+notification. However, they can offer significant cost savings 
+over On-Demand Instances.
+
+• The four pillars of cost optimization are:
+• Right size
+• Increase elasticity
+• Optimal pricing model
+• Optimize storage choices
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 55
+
+
+
+Section 4: Container services
+Module 6: Compute
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved.
+
+
+
+Container basics
+• Containers are a method of 
+
+operating system virtualization. Your Container
+
+• Benefits –  Your application
+
+• Repeatable.
+Dependencies
+
+• Self-contained environments.
+• Software runs the same in different  Configurations
+
+environments.
+• Developer's laptop, test, production. Hooks into OS
+
+• Faster to launch and stop or terminate 
+than virtual machines
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 57
+
+
+
+What is Docker?
+• Docker is a software platform 
+
+that enables you to build, test, 
+and deploy applications quickly. Container
+
+• You run containers on Docker.
+Containers have everything the 
+
+• Containers are created from a  software needs to run:
+template called an image.
+
+• A container has everything a 
+Libraries System 
+
+software application needs to run. tools Code Runtime
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 58
+
+
+
+Containers versus virtual machines
+Three virtual machines on three EC2 instances
+
+Example
+VM 1 VM 2 VM 3
+
+Three containers on one EC2 instance Container
+App 1 App 2 App 3
+
+Container Container Container 
+instance 1 instance 2 instance 3 Bins/Libs Bins/Libs Bins/Libs
+
+Docker App 1 App 2 App 3
+EC2 EC2 EC2 
+
+engine
+Bins/Libs Bins/Libs Bins/Libs instance instance instance 
+
+guest OS guest OS guest OS
+EC2 instance guest OS
+
+Hypervisor
+Part of 
+
+Host operating system AWS Global 
+Infrastructure
+
+Physical server
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 59
+
+
+
+Amazon Elastic Container Service (Amazon ECS)
+• Amazon Elastic Container Service (Amazon ECS) – 
+
+• A highly scalable, fast, container management service 
+
+• Key benefits – 
+Amazon Elastic 
+
+• Orchestrates the running of Docker containers Container Service
+• Maintains and scales the fleet of nodes that run your containers
+• Removes the complexity of standing up the infrastructure
+
+• Integrated with features that are familiar to Amazon EC2 service users – 
+• Elastic Load Balancing
+• Amazon EC2 security groups
+• Amazon EBS volumes
+• IAM roles
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 60
+
+
+
+Amazon ECS orchestrates containers
+
+EC2 instance
+Requests to run containers
+x3 x2
+
+Container A
+EC2 instance
+
+Container B
+Amazon Elastic Container Service 
+
+(Amazon ECS)
+
+ECS cluster
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 61
+
+
+
+Amazon ECS cluster options
+• Key question: Do you want to manage the Amazon ECS cluster that runs the containers?
+
+• If yes, create an Amazon ECS cluster backed by Amazon EC2 (provides more granular control over 
+infrastructure)
+
+• If no, create an Amazon ECS cluster backed by AWS Fargate (easier to maintain, focus on your 
+applications)
+
+Containers
+Amazon ECS cluster  Container instance Container instance Container instance Amazon ECS cluster 
+backed by Amazon  1 2 3 backed by Fargate
+EC2 App 1 App 2 App 3
+
+You manage
+Bins/Libs Bins/Libs Bins/Libs
+
+You manage
+Docker engines (one per OS in the cluster)
+
+AWS manages
+VM guest operating systems in the Amazon ECS cluster
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 62
+
+
+
+What is Kubernetes?
+• Kubernetes is open source software for container orchestration.
+
+• Deploy and manage containerized applications at scale.
+• The same toolset can be used on premises and in the cloud.
+
+• Complements Docker.
+• Docker enables you to run multiple containers on a single OS host. 
+• Kubernetes orchestrates multiple Docker hosts (nodes).
+
+• Automates – 
+• Container provisioning.
+• Networking.
+• Load distribution.
+• Scaling.
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 63
+
+
+
+Amazon Elastic Kubernetes Service (Amazon EKS)
+• Amazon Elastic Kubernetes Service (Amazon EKS)
+
+• Enables you to run Kubernetes on AWS
+• Certified Kubernetes conformant (supports easy migration)
+• Supports Linux and Windows containers Amazon Elastic 
+
+Kubernetes Service
+• Compatible with Kubernetes community tools and supports 
+
+popular Kubernetes add-ons
+
+• Use Amazon EKS to – 
+• Manage clusters of Amazon EC2 compute instances
+• Run containers that are orchestrated by Kubernetes on those 
+
+instances
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 64
+
+
+
+Amazon Elastic Container Registry (Amazon ECR)
+Amazon ECR is a fully managed Docker container registry 
+
+that makes it easy for developers to store, manage, and 
+deploy Docker container images.
+
+Amazon ECS integration
+
+Docker support
+
+Team collaboration
+
+Amazon Elastic 
+Container Registry Access control
+
+Third-party integrations
+Image Registry
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 65
+
+
+
+Section 4 key • Containers can hold everything that an application needs to 
+run.
+
+takeaways • Docker is a software platform that packages software into 
+containers. 
+• A single application can span multiple containers.
+
+• Amazon Elastic Container Service (Amazon ECS) 
+orchestrates the running of Docker containers.
+
+• Kubernetes is open source software for container 
+orchestration. 
+
+• Amazon Elastic Kubernetes Service (Amazon EKS) enables 
+you to run Kubernetes on AWS
+
+• Amazon Elastic Container Registry (Amazon ECR) enables 
+you to store, manage, and deploy your Docker containers.
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 66
+
+
+
+Section 5: Introduction to AWS 
+Lambda
+Module 6: Compute
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved.
+
+
+
+AWS Lambda: Run code without servers
+AWS Lambda is a serverless compute service.
+
+The code you run
+ is a Lambda function
+
+Upload your code
+
+AWS HTTP 
+services endpoint Pay only for the
+
+Mobile apps s Your code
+Run your code on a schedule  runs only when it is  compute time that
+
+triggered you use
+or in response to events
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 68
+
+
+
+Benefits of Lambda
+
+It supports multiple programming languages
+Completely automated administration
+Built-in fault tolerance
+
+AWS It supports the orchestration of multiple functions
+Lambda
+
+Pay-per-use pricing
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 69
+
+
+
+AWS Lambda event sources
+
+Event sources Configure other AWS services as event sources to invoke 
+your function as shown here.
+
+Amazon S3 Alternatively, invoke a Lambda function from the Lambda 
+console, AWS SDK, or AWS CLI. 
+
+Amazon DynamoDB
+
+Amazon Simple Notification 
+Service (Amazon SNS) Lambda Running of your code 
+Amazon Simple Queue function (only when triggered)
+Service (Amazon SQS)
+
+AWS Lambda
+Amazon API Gateway
+
+Logging, monitoring, 
+and metrics
+
+Application Load Balancer
+Amazon 
+
+Many more… CloudWatch
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 70
+
+
+
+AWS Lambda function configuration
+
+Lambda function configuration
+
+Function code
+
+Running of your code (only 
+AWS Lambda when it is triggered)
+
+function
+Dependencies AWS Lambda
+
+(code libraries, etc.)
+Logging, monitoring, 
+and metrics
+
+Amazon 
+Execution role CloudWatch
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 71
+
+
+
+Schedule-based Lambda function example: 
+Start and stop EC2 instances
+Stop instances example
+
+Stop
+IAM role
+
+Time-based 
+1 CloudWatch  2 Lambda function  3 EC2  instances 
+
+event triggered stopped
+
+Start instances example
+
+Start
+IAM role
+
+Time-based 
+4 CloudWatch  5 Lambda function  6 EC2 instances 
+
+event triggered started
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 72
+
+
+
+Event-based Lambda function example: 
+Create thumbnail images
+
+AWS Cloud
+1
+
+2 3
+
+User
+
+Source Lambda 4
+bucket
+
+Execution
+5 role
+
+Access
+policy
+
+Target
+bucket Lambda
+
+function
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 73
+
+
+
+AWS Lambda quotas
+Soft limits per Region:
+• Concurrent executions = 1,000
+• Function and layer storage = 75 GB
+
+Hard limits for individual functions:
+• Maximum function memory allocation = 10,240 MB
+• Function timeout = 15 minutes
+• Deployment package size = 250 MB unzipped, including layers
+• Container image code package size = 10 GB
+
+Additional limits also exist. Details are in the AWS Lambda quotas documentation at 
+https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-limits.html.
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 74
+
+
+
+Section 5 key • Serverless computing enables you to build and run 
+applications and services without provisioning or managing 
+
+takeaways servers. 
+
+• AWS Lambda is a serverless compute service that 
+provides built-in fault tolerance and automatic scaling.
+
+• An event source is an AWS service or developer-created 
+application that triggers a Lambda function to run. 
+
+• The maximum memory allocation for a single Lambda 
+function is 10,240 MB. 
+
+• The maximum run time for a Lambda function is 15 minutes.
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 75
+
+
+
+Activity: Create an To complete this activity:
+AWS Lambda 
+
+Stopinator Function • Go to the hands-on lab environment and launch 
+the AWS Lambda activity.
+
+• Follow the instructions that are provided in the 
+hands-on lab environment.
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 76
+
+
+
+Activity debrief: 
+key takeaways
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 77
+
+
+
+Section 6: Introduction to AWS Elastic 
+Beanstalk
+Module 6: Compute
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved.
+
+
+
+AWS Elastic Beanstalk
+• An easy way to get web applications up and running
+
+• A managed service that automatically handles – 
+• Infrastructure provisioning and configuration
+• Deployment
+• Load balancing
+• Automatic scaling
+
+AWS Elastic • Health monitoring
+Beanstalk • Analysis and debugging
+
+• Logging
+
+• No additional charge for Elastic Beanstalk
+• Pay only for the underlying resources that are used
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 79
+
+
+
+AWS Elastic Beanstalk deployments
+• It supports web applications 
+
+written for common platforms 
+• Java, .NET, PHP, Node.js, Python, 
+
+Ruby, Go, and Docker You  Your code
+manage
+
+HTTP server
+• You upload your code Application server
+
+• Elastic Beanstalk automatically  AWS  Language interpreter
+handles the deployment manages
+
+Operating system
+
+• Deploys on servers such as Apache,  Host
+NGINX, Passenger, Puma, and 
+Microsoft Internet Information 
+Services (IIS)
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 80
+
+
+
+Benefits of Elastic Beanstalk
+
+Fast and simple to Developer Difficult to Complete resource 
+start using productivity outgrow control
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 81
+
+
+
+Activity: AWS Elastic To complete this activity:
+Beanstalk
+
+• Go to the hands-on lab environment and launch 
+the AWS Elastic Beanstalk activity.
+
+• Follow the instructions that are provided in the 
+hands-on lab environment.
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 82
+
+
+
+Activity debrief:  
+Key takeaways
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 83
+
+
+
+Section 6 key • AWS Elastic Beanstalk enhances developer 
+productivity.
+
+takeaways • Simplifies the process of deploying your application.
+• Reduces management complexity.
+
+• Elastic Beanstalk supports Java, .NET, PHP, 
+Node.js, Python, Ruby, Go, and Docker
+
+• There is no charge for Elastic Beanstalk. Pay only 
+for the AWS resources that you use. 
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 84

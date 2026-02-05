@@ -1,0 +1,535 @@
+﻿Chapter 5:
+Architecture Application 
+
+Design (Cloud Architecture)
+Semester 1 2025/2026
+
+By 
+
+Assoc. Prof. Ts. Dr. Novia Admodisastro
+
+Software Engineering & Information System Department
+
+FSKTM, UPM
+
+
+
+Topic Outline
+
+• Microservices and Containers
+
+• Application Serverless Architecture
+
+• Service Access in Cloud Architecture
+
+
+
+Section 1: Microservices and Containers 
+Chapter 5: Cloud Application Design
+
+
+
+Introduction
+• Microservices architectures are not a completely new approach to software 
+
+engineering, but rather a combination of various successful and proven concepts 
+such as: 
+• Agile software development
+• Service-oriented architectures (SOA)
+• API-first design 
+• Continuous integration/continuous delivery (CI/CD)
+
+• Agile is defined as an iterative software development approach where value is 
+provided to users in small increments rather than through a single large launch. 
+• Agile teams evaluate requirements and results continuously, which leads to the 
+
+efficient implementation of change.
+• SOA development approach uses software components called services to create 
+
+business applications. 
+• Each service provides a business capability, and services can also communicate 
+
+with each other across platforms and languages.
+• API-first design revolves around the idea that the end product will be consumed by 
+
+mobile devices, and that APIs will be consumed by client applications. 
+• An API-first approach involves developing APIs that are consistent and reusable, 
+
+which can be accomplished by using an API description language to establish a 
+contract for how the API is supposed to behave. 
+
+• Establishing a contract involves spending more time thinking about the design 
+of an API. 
+
+• It also often involves additional planning and collaboration with the 
+stakeholders providing feedback on the design of an API before any code is 
+written.
+
+4
+• Continuous integration/continuous delivery (CI/CD) – is all about Continuous 
+
+Integration, Continuous Delivery, and Continuous Deployment.
+
+
+
+5
+
+
+
+What does “microservices” mean?
+
+• Microservices is a  software architecture style in which  complex 
+applications are  composed of small, independent  processes 
+communicating with  each other using language-agnostic APIs.
+
+• These services are  small, highly decoupled and focus on doing a small 
+task, facilitating a modular approach to system building.
+
+• On the logical level, microservice architectures are defined by a
+• functional system decomposition into manageable and independently  
+
+deployable components
+• Definition:
+
+“In short, the microservice architectural style is an approach to 
+developing a  single application as a suite of small services, each running in 
+its own process  and communicating with lightweight mechanisms, often an 
+HTTP resource API. 
+
+These services are built around business capabilities and independently  
+deployable by fully automated deployment machinery. There is a bare  
+minimum of centralized management of these services, which may be written 
+in different programming languages and use different data storage  
+technologies” 
+
+James Lewis and Martin Fowler (2014)
+
+
+
+What is Microservices Architecture?
+
+• The term “micro” refers to the sizing: a microservice must be  
+manageable by a single development team (5-9 developers).
+
+• Functional system decomposition means vertical slicing (in 
+contrast  to horizontal slicing through layers).
+
+• Independent deployability implies no shared state and inter-
+process communication (often via HTTP RESTish interfaces).
+
+• Microservice is the first DevOps revolution architectural style 
+that embrace engineering practices of Continuous Delivery.
+
+7
+
+
+
+Points about Microservices Architecture
+
+• Each microservice is functionally complete with
+• Resource representation
+• Data management
+
+• Each microservice handles one resource (or verb), e.g. Clients,  Shop Items, 
+Carts, Checkout
+
+• Independent Deployability is key, it enables separation and independent 
+evolution of
+• code base
+• technology stacks
+• scaling
+• and features, too
+
+• APIs are the front door of microservices, which means that APIs serve as 
+the entry point for applications logic behind a set of programmatic 
+interfaces, typically a RESTful web services API.
+• This API accepts and processes calls from clients, and might implement 
+
+functionality such as traffic management, request filtering, routing, caching, 
+authentication, and authorization. 
+
+23
+
+
+
+Monolith to Microservices
+
+9
+
+
+
+Application 
+scenarios
+
+10
+
+
+
+11
+
+
+
+Evolution from Monolithic Approach …
+
+
+
+… to Microservices Architecture
+• Continuous integration.
+
+• Code changes are 
+frequently merged into the 
+main branch.
+
+• Automated build and test 
+processes ensure that code 
+in the main branch is always 
+production-quality.
+
+• Continuous delivery.
+• Any code changes that pass 
+
+the CI process are 
+automatically published to a 
+production-like 
+environment.
+
+• Deployment into the live 
+production environment 
+may require manual 
+approval, but is otherwise 
+automated.
+
+• The code should always 
+be ready to deploy into 
+production.
+
+• Continuous deployment.
+• Code changes that pass the 
+
+previous two steps are 
+automatically deployed into 
+
+
+
+Container basics
+Container Basics
+
+• Containers are a method of 
+operating sys•tCeomnta vinierrtsu aarel iaz maettihoond .of 
+
+operating system Your Container
+virtualization. 
+
+• Benefits –
+• Benefits –  • Repeatable. 
+
+• Self-contained 
+• Repeatable. environments. 
+
+• Self-contained env•iSroonftmwaerne trsu.ns the same in 
+different environments. 
+
+• Software runs the sa•mDee vinel odpifefer'sre lanpt top, test, 
+production. 
+
+environments.
+• Faster to launch and stop 
+
+• Developer's laptop, teosrt ,t eprrmodinucattieo nth. an virtual 
+machines 
+
+• Faster to launch and stop or terminate 
+than virtual machines
+
+14
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 57
+
+
+
+Containers Vs. Virtual Machines
+
+Containers versus virtual machines
+
+Three virtual machines
+Example
+
+Three containers
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 59
+
+15
+
+
+
+16
+
+
+
+What is Docker?
+What is Docker?
+
+• Docker is a• sDoofctkwear ries  ap slaofttfwoarmre  platform 
+that enables you to build, 
+
+that enables tyeostu, a tnod  bdueipldlo,y t eapspt,l ications 
+and deploy aqpupiclikclya. tions quickly. Container
+
+• You run containers on 
+• You run containers on Docker.
+
+Docker. 
+Containers have everything the 
+
+• Containers are• cCroenatateinde rfsr oarme  care ated from a software needs to run:
+template called taenm plate ca.lled an image.
+
+• A container has everything a 
+• A container shoaftsw aervee arpyptlhiciantgio an  needs to System 
+
+Libraries Code Runtime
+software apprluicnation needs to run. tools
+
+17
+
+© 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved. 58
+
+
+
+Kubernetes
+
+• Kubernetes is open source software for container orchestration. 
+• Deploy and manage containerized applications at scale.
+
+• The same toolset can be used on premises and in the cloud. 
+• Complements Docker.
+
+• Docker enables you to run multiple containers on a single OS host. 
+• Kubernetes orchestrates multiple Docker hosts (nodes). 
+
+• Kubernetes automates operational tasks of container 
+management and includes built-in commands for deploying 
+applications, rolling out changes to your applications, scaling your 
+applications up and down to fit changing needs, monitoring your 
+applications, and more—making it easier to manage applications.
+
+• Automates –
+• Container provisioning. 
+• Networking.
+• Load distribution.
+• Scaling. 
+
+18
+
+
+
+Section 2: Application Serverless Architecture 
+Chapter 5: Cloud Application Design
+
+
+
+Introduction
+
+• Serverless architecture is a software design approach that 
+allows developers to build and run applications without 
+managing servers or backend infrastructure. 
+
+• The developers write their application code while focusing on 
+the business logic at the frontend, and then deploy the code in 
+the containers to be managed by a cloud service provider. 
+
+• “Serverless” does not mean that there are no servers. Servers 
+are definitely being used, but developers do not concern about 
+managing the servers. 
+
+20
+
+
+
+Scope and purpose 
+
+• Organisations that aim to reduce costs opt for serverless 
+architecture because cloud service providers only charge for the 
+time that serverless functions are running. 
+
+• Additionally, these solutions take care of infrastructure 
+management chores like capacity provisioning and patching, so 
+that engineers and developers can focus completely on 
+developing software that benefits the clients. 
+
+• Web applications may scale without any operational concerns if 
+switching to serverless architecture. 
+
+21
+
+
+
+Basic elements of serverless architecture 
+
+• Function-as-a-Service (FaaS) – FaaS is in charge of carrying out the logic 
+that decides how resources are distributed in a particular situation. 
+
+• The client interface – Short bursts of queries, stateless interactions, and 
+flexible integrations must all be supported by the interface. Additionally, 
+the interface needs to be built to support both very high and low volume 
+data transmissions. 
+
+• A web server on the cloud – A stateless interaction will begin on the web 
+server after the user does so and continue there until the FaaS service 
+cancels it. 
+
+• A security service – Serverless operations place a strong emphasis on 
+security. Serverless applications make use of a token service, where users 
+can generate temporary credentials to use when calling a function. 
+
+• Backend database – The data that will be shared with the user is kept in 
+the backend database. 
+
+• API gateway – Components 1 and 2—namely, FaaS and the client 
+interface—are connected by the API gateway. When a user starts an 
+action, the API gateway relays it so that the FaaS service can set off an 
+event. 
+
+22
+
+
+
+Structure of Serverless Architecture
+
+23
+
+
+
+Function- as- a- Service (FaaS)
+Example: Function-as-a-Service (FaaS) 
+
+Cloud computing service that enables developers to
+build, run, and manage application components as
+functions without maintaining their own
+infrastructure. It is an event-driven execution model
+that runs in stateless containers.
+
+The application developers focus on writing
+business logic in terms of functions. These functions
+run in stateless ephemeral containers and are
+triggered by an event and managed entirely by the
+third-party vendor.
+
+24
+
+
+
+Serverless Architecture Techniques
+
+• Use a compute service to execute code on demand. 
+
+• Write single-purpose, stateless functions. 
+
+• Design push-based, event-driven pipelines. 
+
+• Create thicker, more powerful front ends. 
+
+• Embrace third-party services. 
+
+25
+
+
+
+Benefits of Serverless Architecture
+
+Improve the productivity of developers –
+developers can simply deploy their code without
+having to manage any servers.
+
+Cost effective – cloud service providers only charge
+customers when there is execution, so there is no
+need to pay for unused servers.
+
+Develop in any language – serverless is a polyglot
+environment that accepts code in any language, like
+Java, Python, JavaScript.
+
+Simplified scalability – developers do not have to
+worry about policies to scale up their code
+
+26
+
+Benefits of serverless 
+architecture
+
+
+
+Disadvantage of Serverless Architecture
+
+Loss of control – there is lack of control over the software stack
+that the code runs on, where when there is any fault on the
+server’s side only the cloud service provider can fix it.
+
+Concern on the security – since the servers are shared among
+several customers, there can be a breach to the application data if
+the shared server is not configured properly.
+
+Unacceptable latency that impacts on the performance – cold
+starts (which are common in serverless environment) adds several
+seconds of latency when running the code.
+
+Testing and debugging – difficult to do integration testing, which
+evaluates the communications between frontend and backend of
+the application.
+
+Vendor lock-in – in the serverless environment, cloud service
+providers manage all the computing resources. It means that
+migrating code to a new cloud provider could be a challenge.
+
+27
+
+Disadvantages of 
+serverless architecture
+
+
+
+Examples of serverless architecture
+
+Cloud service providers:
+
+• Amazon Web Services (AWS)
+• Microsoft Azure Cloud
+
+Examples of • Google Cloud Platform
+• IBM Cloud
+
+serverless • Alibaba Cloud
+
+Among the uses of serverless architecture:
+
+architecture • Support for dynamic website content
+• Customer relationship management (CRM)
+• Analytics and business intelligence
+• Finance
+
+28
+
+
+
+Example of Serverless Architecture using 
+AWS
+
+(security token services)
+
+29
+
+
+
+Example of Serverless Architecture and 
+Microservices using AWS
+
+30
+
+
+
+External References
+
+• https://alibaba-cloud.medium.com/4-use-cases-of-serverless-
+architecture-74b588061eea
+
+31

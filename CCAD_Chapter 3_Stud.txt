@@ -1,0 +1,777 @@
+﻿Chapter 3:
+Cloud Platform Services
+
+Semester1 2025/2026
+By 
+
+Assoc. Prof. Ts. Dr. Novia Admodisastro
+Software Engineering & Information System Department
+
+FSKTM, UPM
+
+
+
+Topic Outline
+
+• Compute services
+
+• Storage services
+
+• Database services
+
+• Network and content delivery services
+
+• Security, Identity and Compliance services
+
+• Deployment and management services
+
+• Other services
+
+
+
+What are web services?
+
+A web service is any piece of software that makes itself available 
+over the internet and uses a standardized format—such as 
+Extensible Markup Language (XML) or JavaScript Object Notation 
+(JSON)—for the request and the response of an application 
+programming interface (API) interaction.
+
+Request message
+
+Internet
+Response message
+
+Client Web service
+
+3
+
+
+
+Compute 
+services Storage services Database 
+
+services
+
+Network and Security, Identity Deployment and 
+content delivery and Compliance management 
+
+services services services
+
+4
+
+
+
+Compute Services
+
+• Compute services are also known as Infrastructure-as-a-Service 
+(IaaS) describes concepts and objects related to software 
+computation. 
+• Compute platforms supply a virtual server instance and storage 
+
+and APIs that let users migrate workloads to a virtual machine.
+• Consumers allocate compute power and can start, stop, access, and 
+
+configure their computer resources as desired.
+• Choosing the best infrastructure depends on the application 
+
+requirements, lifecycle, code size, demand, and computing 
+needs. 
+• For example, applications that run machine learning algorithms or 3D 
+
+graphics rendering functions require many gigs of RAM and multiple 
+CPUs to run successfully. In this case, the CPUs, RAM, and Graphic 
+Processing Units required will be called compute resources, and the 
+applications would be compute-intensive applications.
+
+5
+
+
+
+6
+
+
+
+Storage Services (1/2)
+
+• Cloud storage enables storing data and files on the internet 
+through a cloud computing provider that consumers access either 
+through the public internet or a dedicated private network 
+connection. 
+• The cloud  provider securely stores, manages, and maintains the storage 
+
+servers, infrastructure, and network to ensure access to the data when 
+needed it at virtually unlimited scale, and with elastic capacity. 
+
+• Cloud storage removes the need to buy and manage data 
+storage infrastructure
+• Giving consumers agility, scalability, and durability, with any time, 
+
+anywhere data access.
+• There are three main cloud storage types: object storage, file 
+
+storage, and block storage. 
+• Each storage offers its own advantages and has its own use cases.
+
+7
+
+
+
+Storage Services (2/2)
+
+• Object storage
+• Organizations have to store a massive and growing amount of unstructured 
+
+data, such as photos, videos, machine learning (ML), sensor data, audio 
+files, and other types of web content, and finding scalable, efficient, and 
+affordable ways to store them can be a challenge. 
+
+• Object storage is a data storage architecture for large stores of unstructured 
+data. 
+
+• File storage
+• File-based storage or file storage is widely used among applications and 
+
+stores data in a hierarchical folder and file format. 
+• Often known as a network-attached storage (NAS) server with common file 
+
+level protocols of Server Message Block (SMB) used in Windows instances 
+and Network File System (NFS) found in Linux.
+
+• Block storage
+• Stores data in the form of blocks. Each block has its own unique identifier for 
+
+quick storage and retrieval.
+• Enterprise applications like databases or enterprise resource planning (ERP) 
+
+systems often require dedicated, low-latency storage for each host. 
+• This is analogous to direct-attached storage (DAS) or a storage area network 
+
+(SAN). 
+
+8
+
+
+
+Database Services
+
+• A database is an electronically stored, systematic collection of data. It 
+can contain any type of data, including words, numbers, images, videos, 
+and files. 
+• Classify databases according to their use case, data type, and data storage 
+
+method.
+• A cloud database typically runs on a cloud-computing platform. There 
+
+are two standard deployment models:
+• users can run databases on the cloud independently or 
+• purchase access from a cloud database provider. 
+
+• Database evolution
+• Hierarchical database
+• Network database
+• Relational database
+• Object-oriented database
+• NoSQL database
+• Graph Database
+
+9
+
+
+
+Networking and Content Delivery Services 
+(1/2)
+• A cloud network can be seen as a WAN with its infrastructure 
+
+delivered by a cloud-based service
+• Some or all of an organization’s network capabilities and resources are 
+
+hosted in a public or private cloud platform and made available on 
+demand. 
+
+• These network resources can include virtual routers, firewalls, 
+bandwidth, and network management software, with other tools and 
+functions available as required.
+
+• Content Delivery Services (CDN) main purpose is to reduce 
+latency, or reduce the delay in communication created by a 
+network's design. 
+• Because of the global and complex nature of the internet, 
+
+communication traffic between websites (servers) and their users 
+(clients) has to move over large physical distances. 
+
+• The communication is also two-way, with requests going from the client 
+to the server and responses coming back.
+
+10
+
+
+
+Networking and Content 
+Delivery Services (2/2)
+• A CDN improves efficiency by introducing intermediary servers 
+
+between the client and the website server. 
+• These CDN servers manage some of the client-server communications.
+• They decrease web traffic to the web server, reduce bandwidth 
+
+consumption, and improve the user experience of the applications.
+• A CDN can deliver two types of contents:
+
+• Static content 
+• website data that does not change from user to user. 
+• Website header images, logos, and font styles remain the same across all users, 
+
+and the business does not change them frequently. 
+• Static data does not need to be modified, processed, or generated and is ideal for 
+
+storage on a CDN.
+• Dynamic content – 
+
+• such as social media news feeds, weather reports, login status, and chat messages 
+vary among website users. 
+
+• this data changes based on the user's location, login time, or user preferences, and 
+the website must generate the data for every user and every user interaction.
+
+11
+
+
+
+12
+
+
+
+Security, Identity and Compliance Services
+
+• Secure consumers’ workloads and applications in the cloud.
+• Identity and Access Management (IAM) is a web service that helps securely 
+
+control access to cloud resources. 
+• control who is authenticated (signed in) and authorized (has permissions) to use 
+
+resources.
+• enables to securely control access to services and resources for application users, 
+
+groups, and roles. 
+• create and manage fine-grained access controls with permissions, specify who can 
+
+access which services and resources, and under which conditions.
+• Network and application protection services enable you to enforce fine-
+
+grained security policy at network control points across your organization. 
+• inspect and filter traffic to prevent unauthorized resource access at the host-, network-, 
+
+and application-level boundaries. 
+• Data protection provides services that help to protect data, accounts, and 
+
+workloads from unauthorized access. 
+• provide encryption and key management and threat detection
+
+• Compliance provides comprehensive view of compliance status and 
+continuously monitors consumer environment using automated compliance 
+checks based on the best practices and industry standards.
+
+13
+
+
+
+Deployment and management services 
+(1/1)
+• There are multiple options for provisioning infrastructure and 
+
+deploying cloud applications. 
+• Whether the application architecture is a simple three-tier web 
+
+application or a complex set of workloads. 
+• Based on the nature of the application and the underlying 
+
+services (compute, storage, database, etc.) that it requires, cloud 
+services are use to create a flexible deployment solution that can 
+be tailored to fit the needs of both application and organization.
+• Many organizations adopt containers to ‘decompose’ monolithic 
+
+applications into microservices, or to migrate software development and 
+deployment to the cloud.
+
+• Container deployment involves using container technologies to deploy 
+applications. E.g. docker, Kubernetes, Google Kubernestes Engine (GKE), 
+Amazon Elastics Container Service (ECS), Azure Container Instances, 
+OpenShift Container Platform 
+
+14
+
+
+
+Deployment and management services 
+(2/2)
+
+Traditional Deployment Virtualisation Container
+
+15
+
+
+
+What is AWS?
+• AWS is a secure cloud platform that offers a broad set of global cloud-
+
+based products.
+• AWS provides you with on-demand access to compute, storage, 
+
+network, database, and other IT resources and management tools.
+• AWS offers flexibility.
+• You pay only for the individual services you need, for as long as you use 
+
+them.
+• AWS services work together like building blocks.
+
+16
+
+
+
+AWS foundational services
+
+Applications Virtual desktops Collaboration and sharing
+
+Databases Analytics Application Deployment and Mobile 
+Cluster services management Services
+
+Relational computing Queuing Containers Identity
+Platform Real-time Orchestration DevOps tools Sync
+Services NoSQL Data App Streaming Resource templates Mobile 
+
+warehouse Transcoding
+Usage tracking Analytics
+
+Caching Data Email
+workflows Monitoring and logs Notifications
+
+Search
+
+Compute (virtual, 
+Foundation automatic scaling, and Networking Storage (object, 
+
+Services load balancing) block, and archive)
+
+Infrastructure Regions Availability Zones Edge locations
+
+17
+
+
+
+Categories of AWS services (1/2)
+
+Analytics Application AR and VR Blockchain Business Compute
+Integration Applications
+
+Cost Customer Database Developer Tools End User Game Tech
+Management Engagement Computing
+
+Internet Machine Management and Media Services Migration and Mobile
+of Things Learning Governance Transfer
+
+Networking and Robotics Satellite Security, Identity, and Storage
+Content Delivery  Compliance
+
+18
+
+
+
+Categories of AWS services (2/2)
+
+Analytics Application AR and VR Blockchain Business Compute
+Integration Applications
+
+Cost Customer Database Developer Tools End User Game Tech
+Management Engagement Computing
+
+Internet Machine Management and Media Services Migration and Mobile
+of Things Learning Governance Transfer
+
+Networking and Robotics Satellite Security, Identity, and Storage
+Content Delivery Compliance
+
+Ref. Documentation - https://docs.aws.amazon.com/
+19
+
+
+
+Services and its categories
+
+Compute services – Storage services – Management and 
+• Amazon EC2 • Amazon S3 Governance services –
+• AWS Lambda • Amazon S3 Glacier • AWS Trusted Advisor
+• AWS Elastic Beanstalk • Amazon EFS • AWS CloudWatch
+• Amazon EC2 Auto Scaling • Amazon EBS • AWS CloudTrail
+• Amazon ECS • AWS Well-Architected Tool
+• Amazon EKS Database services – • AWS Auto Scaling
+• Amazon ECR • Amazon RDS • AWS Command Line Interface
+• AWS Fargate • Amazon DynamoDB • AWS Config
+
+• Amazon Redshift • AWS Management Console
+• Amazon Aurora • AWS Organizations
+
+Security, Identity, and 
+Compliance services – Networking and Content AWS Cost Management 
+• AWS IAM Delivery services – services –
+• Amazon Cognito • Amazon VPC • AWS Cost & Usage 
+• AWS Shield • Amazon Route 53 Report
+• AWS Artifact • Amazon CloudFront • AWS Budgets
+• AWS KMS • Elastic Load Balancing • AWS Cost Explorer
+
+20
+
+
+
+Choosing a service
+• The service you select depends on your business goals and technology 
+
+requirements.
+
+Amazon 
+VMware Cloud EC2 AWS 
+
+on AWS Lambda
+
+Amazon ECS ? AWS Elastic 
+Beanstalk
+
+Amazon EKS
+
+Amazon 
+AWS Fargate
+
+AWS Outposts Lightsail
+
+AWS Batch
+
+21
+
+
+
+Compute service category
+
+AWS Compute services
+
+Amazon EC2 Amazon EC2 Amazon Elastic Amazon EC2 
+Auto Scaling Container Service Container Registry
+
+(Amazon ECS)
+
+AWS Elastic AWS Amazon Elastic AWS 
+Beanstalk Lambda Kubernetes Service Fargate
+
+(Amazon EKS)
+
+22
+
+
+
+Compute service category (example)
+• Amazon Elastic Compute Cloud (EC2) - to deploy a selection of on-
+
+demand instances offering a wide array of different performance 
+benefits within your AWS environment.
+• Amazon Elastic Container Service (Amazon ECS) - to run Docker-
+
+enabled applications packaged as containers across a cluster of EC2 
+instances
+• AWS Lambda - to run your own code using only milliseconds of compute 
+
+resource in response to event-driven triggers in serverless environment, 
+you could use
+
+23
+
+
+
+Storage service category
+
+AWS storage services
+
+Amazon Simple Amazon Elastic Amazon Elastic 
+Storage Service Block Store File System 
+
+(Amazon S3) (Amazon EBS) (Amazon EFS)
+
+Amazon Simple 
+Storage Service 
+
+Glacier
+
+24
+
+
+
+Storage service category (example)
+• Amazon Simple Storage Service (Amazon S3) redundantly stores objects 
+
+on multiple devices across a minimum of three Availability Zones 
+(clusters of discrete data centers with redundant power, networking, and 
+connectivity in an AWS Region).
+• Amazon FSx and Amazon Elastic File System (Amazon EFS) provide 
+
+shared file access for applications with unstructured data such as video 
+and medical images, web and rich media content, or user directories or 
+large data sets.
+• Block-based cloud storage solutions like Amazon Elastic Block Store 
+
+(Amazon EBS) are provisioned with each Amazon Elastic Compute Cloud 
+(Amazon EC2) compute instance and deliver the ultra-low latency 
+required for high-performance workloads.
+
+25
+
+
+
+Database service category
+
+AWS Database services
+
+Amazon Relational Amazon Aurora Amazon 
+Database Service Redshift
+
+Amazon 
+DynamoDB
+
+26
+
+
+
+27
+
+
+
+Database service category (example)
+• Amazon Relational Database Service (Amazon RDS) is a managed 
+
+service that makes it easy to set up, operate, and scale a relational 
+database in the cloud.
+• Amazon Aurora is a relational database built for the cloud. As a fully 
+
+managed service, it automates time-consuming tasks such as 
+provisioning, patching, backup, recovery, failure detection, and repair.
+• Amazon Neptune is a graph-oriented database that can execute more 
+
+than 100,000 queries per second.
+• Amazon Redshift is a fully managed, petabyte-scale data warehouse 
+
+service in the cloud.
+• Amazon ElastiCache is an in-memory NoSQL database that is fully 
+
+managed, scalable, and secure. It is a popular choice for mobile apps, 
+gaming, e-commerce, and other applications where frequently accessed 
+data must be stored in memory.
+
+28
+
+
+
+Networking and content delivery service category
+
+AWS networking 
+and content delivery services
+
+Amazon VPC Elastic Load Amazon AWS Transit 
+Balancing CloudFront Gateway 
+
+Amazon AWS Direct AWS VPN
+Route 53 Connect
+
+29
+
+
+
+Networking and content delivery service category 
+(example)
+• Networking foundations
+
+• These services offer solutions for Virtual Private Clouds (VPCs) and for linking on-
+premise networks with VPCs. Amazon VPC, AWS transit gateway, and AWS private 
+link provide optimized solutions to meet your networking requirements.
+
+• Network security
+• Services like AWS shield, AWS WAF, and AWS firewall manager protect your AWS 
+
+cloud network and applications against cyber-attacks.
+
+• Amazon CloudFront is a content delivery network (CDN) service built for high 
+performance, security, and developer convenience. Amazon CloudFront use to 
+do these tasks:
+• Deliver data through 275+ globally dispersed points of presence (POPs) with 
+
+automated network mapping and intelligent routing.
+• Improve security with traffic encryption and access controls, and use AWS Shield 
+
+Standard to defend against distributed denial-of-service (DDoS) attacks at no 
+additional charge.
+
+• Customize the code you run at the AWS network edge using serverless compute 
+features to balance cost, performance, and security.
+
+• Scale automatically to deliver software, game patches, and IoT updates with high 
+transfer rates.
+
+30
+
+
+
+Security, identity, and compliance service category
+
+AWS security, identity, 
+and compliance services
+
+AWS Identity and Access AWS Amazon Cognito
+Management (IAM) Organizations
+
+AWS Artifact AWS Key AWS Shield
+Management 
+
+Service 
+
+31
+
+
+
+AWS cost management service category
+
+AWS cost management 
+services
+
+AWS Cost and AWS Budgets AWS Cost 
+Usage Report Explorer
+
+32
+
+
+
+Management and governance service category
+
+AWS management and 
+governance services
+
+AWS Management AWS Config Amazon AWS Auto 
+Console CloudWatch Scaling
+
+AWS Command AWS Trusted AWS Well- AWS 
+Line Interface Advisor Architected Tool CloudTrail
+
+33
+
+
+
+Simple solution example
+
+Networking Compute Database Storage
+
+AWS Cloud
+
+Virtual Private Cloud (VPC)
+
+Amazon 
+DynamoDB
+
+Users Amazon S3
+
+Amazon EC2
+
+34
+
+
+
+Three ways to interact with AWS
+
+AWS Management Console
+Easy-to-use graphical interface
+
+Command Line Interface (AWS CLI)
+Access to services by discrete commands or scripts
+
+Software Development Kits (SDKs)
+Access services directly from your code (such as Java, Python, and 
+others)
+
+35
+
+
+
+2
+
+3
+
+1
+
+https://docs.aws.amazon.com/cloud9/latest/user-guide/welcome.html
+https://docs.aws.amazon.com/cloudshell/latest/userguide/welcome.html
+
+36
+
+
+
+AWSA MWaSn Maganeamgenmte Cnto nCosonsleole
+
+© 2020, Amazon Web Services, Inc. or its affiliates. All rights reserved.
+
+37
+
+
+
+Command Line Interface (AWS CLI)
+AWS CLI
+
+Open source tool for
+interacting with AWS services
+
+Environments
+• Linux
+• MacOS
+• Windows aws
+
+© 2020, Amazon Web Services, Inc. or its affiliates. All rights reserved.
+
+38
+
+
+
+Software Development Kits (SDKs)
+AWS SDKs
+
+JavaScript Go 
+
+Python Node.js
+
+PHP C++
+
+.NET Java
+
+Ruby IoT
+
+© 2020, Amazon Web Services, Inc. or its affiliates. All rights reserved.
+39
+
+
+
+Takeaway
+
+• Provide an overview of different cloud services i.e., compute, 
+storage, database, identity and access management etc. 
+• Recognize the main cloud service categories and core services in 
+
+cloud platform services e.g., AWS.
+
+
+
+Refers Activity 4: Hands on AWS Management Console 
+
+41
+
+
+
+External References
+
+• [1] AWS Regional Services List: https://aws.amazon.com/about-
+aws/global-infrastructure/regional-product-services/
+• [2] AWS Cloud Products: https://aws.amazon.com/products/
+
+42
